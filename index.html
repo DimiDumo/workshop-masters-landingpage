@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI & Design Workshop — Animation Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A0B14;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(79,70,229,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,70,229,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* glow blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.35;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #4F46E5; top: -150px; left: -150px; }
+    .blob-2 { width: 400px; height: 400px; background: #6366F1; bottom: -100px; right: -100px; }
+
+    .hub {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hub-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 12px; font-weight: 600; color: #818CF8;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hub-badge-dot { width: 6px; height: 6px; background: #818CF8; border-radius: 50%; }
+
+    .hub-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 52px; font-weight: 800;
+      letter-spacing: -2px; line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hub-title span { color: #818CF8; }
+
+    .hub-sub {
+      font-size: 17px; line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      max-width: 520px; margin: 0 auto 56px;
+    }
+
+    .versions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .version-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .version-card:hover {
+      background: rgba(79,70,229,0.12);
+      border-color: rgba(79,70,229,0.4);
+      transform: translateY(-4px);
+    }
+
+    .v-number {
+      font-family: 'Sora', sans-serif;
+      font-size: 48px; font-weight: 800;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #818CF8, #4F46E5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .v-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px; font-weight: 700;
+      color: #fff;
+    }
+    .v-desc {
+      font-size: 13px; line-height: 1.6;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+    }
+    .v-status {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px; border-radius: 100px;
+      background: rgba(99,102,241,0.15);
+      color: #818CF8;
+      border: 1px solid rgba(99,102,241,0.25);
+    }
+    .v-status-dot { width: 5px; height: 5px; background: #818CF8; border-radius: 50%; }
+
+    .v-arrow {
+      width: 36px; height: 36px;
+      background: rgba(79,70,229,0.2);
+      border: 1px solid rgba(79,70,229,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .version-card:hover .v-arrow { background: #4F46E5; border-color: #4F46E5; }
+    .v-arrow svg { width: 16px; height: 16px; stroke: #818CF8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .version-card:hover .v-arrow svg { stroke: #fff; }
+
+    .hub-footer {
+      margin-top: 48px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+    }
+    .hub-footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .hub-footer a:hover { color: rgba(255,255,255,0.6); }
+
+    @media (max-width: 640px) {
+      .hub-title { font-size: 36px; }
+      .versions-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hub">
+    <div class="hub-badge">
+      <div class="hub-badge-dot"></div>
+      Animation Lab
+    </div>
+
+    <h1 class="hub-title">Pick a <span>Version</span></h1>
+    <p class="hub-sub">Three identical websites — same base design, different background animations. Switch between them to compare.</p>
+
+    <div class="versions-grid">
+      <a href="v1/index.html" class="version-card">
+        <div class="v-number">V1</div>
+        <div class="v-label">Version 1</div>
+        <p class="v-desc">Base design.<br>Add animation here.</p>
+        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
+        <div class="v-arrow">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+
+      <a href="v2/index.html" class="version-card">
+        <div class="v-number">V2</div>
+        <div class="v-label">Version 2</div>
+        <p class="v-desc">Base design.<br>Add animation here.</p>
+        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
+        <div class="v-arrow">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+
+      <a href="v3/index.html" class="version-card">
+        <div class="v-number">V3</div>
+        <div class="v-label">Version 3</div>
+        <p class="v-desc">Base design.<br>Add animation here.</p>
+        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
+        <div class="v-arrow">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </a>
+    </div>
+
+    <p class="hub-footer">
+      Dumonet Solutions · AI &amp; Design Thinking Workshop
+    </p>
+  </div>
+</body>
+</html>
