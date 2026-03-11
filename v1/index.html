@@ -283,7 +283,7 @@
 
     /* ── TESTIMONIALS ────────────────────────────────── */
     .testimonials-wrap { background: #F1F5F9; }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .testimonial-card {
       background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
       padding: 32px; display: flex; flex-direction: column; gap: 20px;
@@ -442,7 +442,46 @@
       .logos-row { gap: 28px; flex-wrap: wrap; }
       .site-footer { padding: 32px 24px; }
     }
+
+    /* ── I18N ───────────────────────────────────────── */
+    html.i18n-loading { visibility: hidden; }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: #F1F5F9;
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .lang-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lang-btn.active {
+      background: #fff;
+      color: #0F172A;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .lang-btn:hover:not(.active) { color: #0F172A; }
   </style>
+
+  <script>
+  (function() {
+    var stored = localStorage.getItem('lang');
+    var lang = stored || (navigator.language && navigator.language.startsWith('de') ? 'de' : 'en');
+    if (!stored) localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+    if (lang !== 'en') document.documentElement.classList.add('i18n-loading');
+  })();
+  </script>
 
   <!-- Schema.org: Organization -->
   <script type="application/ld+json">
@@ -634,8 +673,8 @@
       "@type": "AggregateRating",
       "ratingValue": "5",
       "bestRating": "5",
-      "ratingCount": "4",
-      "reviewCount": "4"
+      "ratingCount": "3",
+      "reviewCount": "3"
     },
     "review": [
       {
@@ -654,12 +693,6 @@
         "@type": "Review",
         "author": { "@type": "Person", "name": "Nicolas Gutierrez" },
         "reviewBody": "By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building. I've shipped two more tools since.",
-        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-      },
-      {
-        "@type": "Review",
-        "author": { "@type": "Person", "name": "Sarah Hoffmann" },
-        "reviewBody": "We thought AI prototyping was only for tech teams. Turns out, with the right method, our HR department built a tool that cut onboarding time in half. Genuinely mind-blowing.",
         "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
       }
     ]
@@ -689,15 +722,19 @@
       <span class="logo-text">Workshoppers</span>
     </div>
     <nav aria-label="Main navigation">
-      <a href="#how-it-works">How It Works</a>
-      <a href="#learn">What You Learn</a>
-      <a href="#team">Team</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#testimonials">Results</a>
-      <a href="#faq">FAQ</a>
+      <a href="#how-it-works" data-i18n="nav.how">How It Works</a>
+      <a href="#learn" data-i18n="nav.learn">What You Learn</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#testimonials" data-i18n="nav.results">Results</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
+    <div class="lang-toggle" aria-label="Language" role="group">
+      <button data-lang="en" class="lang-btn active">EN</button>
+      <button data-lang="de" class="lang-btn">DE</button>
+    </div>
     <div>
-      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn">Book a Discovery Call</a>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Book a Discovery Call</a>
     </div>
   </div>
 </header>
@@ -711,12 +748,12 @@
   <div class="hero">
     <div class="badge" id="v1-badge">
       <div class="badge-dot"></div>
-      <span class="badge-text">First of its kind Workshop</span>
+      <span class="badge-text" data-i18n="hero.badge">First of its kind Workshop</span>
     </div>
-    <h1 class="hero-title" id="v1-title">Use AI and<br><em>Design Thinking</em><br>to Build Your Own Solutions</h1>
-    <p class="hero-sub" id="v1-desc">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
+    <h1 class="hero-title" id="v1-title" data-i18n="hero.title">Use AI and<br><em>Design Thinking</em><br>to Build Your Own Solutions</h1>
+    <p class="hero-sub" id="v1-desc" data-i18n="hero.sub">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
     <div class="hero-cta-wrap" id="v1-cta">
-      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block">Book a Discovery Call</a>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block" data-i18n="hero.cta">Book a Discovery Call</a>
       <div class="trust-row">
         <div class="trust-logos">
           <span>BMW</span>
@@ -732,13 +769,13 @@
 <section class="section-wrap problem-wrap">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">The Problem</span>
-      <h2 class="section-title">Most Teams Know Exactly<br>What's Slowing Them Down</h2>
-      <p class="section-sub">The tricky part isn't identifying the problem, it's finding the time, the tools, and the method to actually do something about it. So it stays on the list. Quarter after quarter.</p>
+      <span class="section-label" data-i18n="problem.label">The Problem</span>
+      <h2 class="section-title" data-i18n="problem.title">Most Teams Know Exactly<br>What's Slowing Them Down</h2>
+      <p class="section-sub" data-i18n="problem.sub">The tricky part isn't identifying the problem, it's finding the time, the tools, and the method to actually do something about it. So it stays on the list. Quarter after quarter.</p>
     </div>
     <div class="gradient-card">
-      <p class="card-sub">What if you could<br>just… fix it?</p>
-      <p class="card-main">This week.</p>
+      <p class="card-sub" data-i18n="problem.card.sub">What if you could<br>just… fix it?</p>
+      <p class="card-main" data-i18n="problem.card.main">This week.</p>
       <div class="card-accent"></div>
     </div>
   </div>
@@ -748,28 +785,28 @@
 <section class="section-wrap" id="how-it-works">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">How It Works</span>
-      <h2 class="section-title">We Don't Teach AI in Theory.<br>We Give Your Team a Goal.</h2>
-      <p class="section-sub">Because the fastest way to learn a new skill isn't a course. It's a project with a deadline and something worth finishing at the end.</p>
+      <span class="section-label" data-i18n="how.label">How It Works</span>
+      <h2 class="section-title" data-i18n="how.title">We Don't Teach AI in Theory.<br>We Give Your Team a Goal.</h2>
+      <p class="section-sub" data-i18n="how.sub">Because the fastest way to learn a new skill isn't a course. It's a project with a deadline and something worth finishing at the end.</p>
     </div>
     <div class="steps-grid">
       <div class="step-card">
         <div class="step-num">01</div>
-        <h3 class="step-title">Understand the Problem</h3>
-        <p class="step-desc">Your team uses Design Thinking to properly understand the challenge: who it affects, why it matters, and what a real solution looks like.</p>
-        <span class="step-tag">Part 1 — Design Thinking</span>
+        <h3 class="step-title" data-i18n="how.s1.title">Understand the Problem</h3>
+        <p class="step-desc" data-i18n="how.s1.desc">Your team uses Design Thinking to properly understand the challenge: who it affects, why it matters, and what a real solution looks like.</p>
+        <span class="step-tag" data-i18n="how.s1.tag">Part 1 — Design Thinking</span>
       </div>
       <div class="step-card">
         <div class="step-num">02</div>
-        <h3 class="step-title">Build with AI</h3>
-        <p class="step-desc">Using AI tools like Lovable.dev, your team builds a working prototype. Not a mockup, but a live application that tackles the problem.</p>
-        <span class="step-tag">Part 2 — AI Prototyping</span>
+        <h3 class="step-title" data-i18n="how.s2.title">Build with AI</h3>
+        <p class="step-desc" data-i18n="how.s2.desc">Using AI tools like Lovable.dev, your team builds a working prototype. Not a mockup, but a live application that tackles the problem.</p>
+        <span class="step-tag" data-i18n="how.s2.tag">Part 2 — AI Prototyping</span>
       </div>
       <div class="step-card">
         <div class="step-num">03</div>
-        <h3 class="step-title">Own the Skills</h3>
-        <p class="step-desc">By the end, your team won't just have a working prototype. They'll know how to do it again. On their own. Without us.</p>
-        <span class="step-tag">Results</span>
+        <h3 class="step-title" data-i18n="how.s3.title">Own the Skills</h3>
+        <p class="step-desc" data-i18n="how.s3.desc">By the end, your team won't just have a working prototype. They'll know how to do it again. On their own. Without us.</p>
+        <span class="step-tag" data-i18n="how.s3.tag">Results</span>
       </div>
     </div>
   </div>
@@ -779,34 +816,34 @@
 <section class="section-wrap" id="learn">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Skills</span>
-      <h2 class="section-title">What Your Team Learns by Doing</h2>
-      <p class="section-sub">Practical skills they'll use immediately, and keep using long after the workshop.</p>
+      <span class="section-label" data-i18n="learn.label">Skills</span>
+      <h2 class="section-title" data-i18n="learn.title">What Your Team Learns by Doing</h2>
+      <p class="section-sub" data-i18n="learn.sub">Practical skills they'll use immediately, and keep using long after the workshop.</p>
     </div>
     <div class="learn-grid">
       <div class="learn-card">
         <!-- sparkles -->
         <svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-        <h3 class="learn-title">Use AI tools confidently</h3>
-        <p class="learn-desc">And know their limits. Understand what AI can and can't do, so you use it wisely.</p>
+        <h3 class="learn-title" data-i18n="learn.c1.title">Use AI tools confidently</h3>
+        <p class="learn-desc" data-i18n="learn.c1.desc">And know their limits. Understand what AI can and can't do, so you use it wisely.</p>
       </div>
       <div class="learn-card">
         <!-- puzzle -->
         <svg viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 2c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z"/></svg>
-        <h3 class="learn-title">Break messy problems down</h3>
-        <p class="learn-desc">Turn a vague challenge into something buildable using Design Thinking.</p>
+        <h3 class="learn-title" data-i18n="learn.c2.title">Break messy problems down</h3>
+        <p class="learn-desc" data-i18n="learn.c2.desc">Turn a vague challenge into something buildable using Design Thinking.</p>
       </div>
       <div class="learn-card">
         <!-- message-square -->
         <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <h3 class="learn-title">Prompt, iterate, and build</h3>
-        <p class="learn-desc">Build working applications using just natural language. No coding experience required.</p>
+        <h3 class="learn-title" data-i18n="learn.c3.title">Prompt, iterate, and build</h3>
+        <p class="learn-desc" data-i18n="learn.c3.desc">Build working applications using just natural language. No coding experience required.</p>
       </div>
       <div class="learn-card accent">
         <!-- repeat -->
         <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-        <h3 class="learn-title">Run the process again</h3>
-        <p class="learn-desc">For the next problem, and the one after that. The method is yours to keep.</p>
+        <h3 class="learn-title" data-i18n="learn.c4.title">Run the process again</h3>
+        <p class="learn-desc" data-i18n="learn.c4.desc">For the next problem, and the one after that. The method is yours to keep.</p>
       </div>
     </div>
   </div>
@@ -816,54 +853,43 @@
 <section class="section-wrap testimonials-wrap" id="testimonials">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Testimonials</span>
-      <h2 class="section-title">What Teams Say After<br>the Workshop</h2>
+      <span class="section-label" data-i18n="test.label">Testimonials</span>
+      <h2 class="section-title" data-i18n="test.title">What Teams Say After<br>the Workshop</h2>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <p class="testimonial-quote">"No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation, and then used them. That's how you upskill a team and improve processes at the same time."</p>
+        <p class="testimonial-quote" data-i18n="test.q1">"No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation, and then used them. That's how you upskill a team and improve processes at the same time."</p>
         <div class="t-author">
           <img class="avatar" src="assets/florian-bogenschuetz.jpg" alt="Florian Bogenschütz" style="object-fit:cover">
           <div class="author-info">
             <span class="author-name">Florian Bogenschütz</span>
-            <span class="author-role">CEO Wayra Germany / Telefonica</span>
+            <span class="author-role" data-i18n="test.r1">CEO Wayra Germany / Telefonica</span>
           </div>
         </div>
       </div>
       <div class="testimonial-card">
-        <p class="testimonial-quote">"I'm not a developer, I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI."</p>
+        <p class="testimonial-quote" data-i18n="test.q2">"I'm not a developer, I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI."</p>
         <div class="t-author">
           <img class="avatar" src="assets/franziska-kraft.jpg" alt="Franziska Kraft" style="object-fit:cover">
           <div class="author-info">
             <span class="author-name">Franziska Kraft</span>
-            <span class="author-role">Head of Marketing, Wayra Germany / Telefonica</span>
+            <span class="author-role" data-i18n="test.r2">Head of Marketing, Wayra Germany / Telefonica</span>
           </div>
         </div>
       </div>
       <div class="testimonial-card">
-        <p class="testimonial-quote">"By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building. I've shipped two more tools since."</p>
+        <p class="testimonial-quote" data-i18n="test.q3">"By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building. I've shipped two more tools since."</p>
         <div class="t-author">
           <img class="avatar" src="assets/nicolas-gutierrez.jpg" alt="Nicolas Gutierrez" style="object-fit:cover">
           <div class="author-info">
             <span class="author-name">Nicolas Gutierrez</span>
-            <span class="author-role">Founder, Flygaroo</span>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"We thought AI prototyping was only for tech teams. Turns out, with the right method, our HR department built a tool that cut onboarding time in half. Genuinely mind-blowing."</p>
-        <div class="t-author">
-          <div class="avatar" style="background:#A78BFA">SH</div>
-          <div class="author-info">
-            <span class="author-name">Sarah Hoffmann</span>
-            <span class="author-role">Head of HR, Automotive OEM</span>
+            <span class="author-role" data-i18n="test.r3">Founder, Flygaroo</span>
           </div>
         </div>
       </div>
     </div>
     <div class="carousel-dots">
       <div class="dot active"></div>
-      <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
@@ -879,34 +905,34 @@
 <section class="section-wrap" id="team">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Your Coaches</span>
-      <h2 class="section-title">The Team Behind<br>the Workshop</h2>
-      <p class="section-sub">A unique mix of AI, design thinking, and psychology.</p>
+      <span class="section-label" data-i18n="team.label">Your Coaches</span>
+      <h2 class="section-title" data-i18n="team.title">The Team Behind<br>the Workshop</h2>
+      <p class="section-sub" data-i18n="team.sub">A unique mix of AI, design thinking, and psychology.</p>
     </div>
     <div class="team-grid">
       <div class="team-card">
         <img class="team-avatar" src="assets/david-kohlbauer.jpg" alt="David Kohlbauer" style="object-fit:cover">
         <div class="team-name-wrap">
           <a class="team-name" href="https://www.linkedin.com/in/david-kohlbauer-a992608a/" target="_blank" style="text-decoration:none;color:inherit">David Kohlbauer</a>
-          <div class="team-role">Design Thinking Expert</div>
+          <div class="team-role" data-i18n="team.m1.role">Design Thinking Expert</div>
         </div>
-        <p class="team-desc">Leads Design Thinking workshops at BMW and SAP. Guides teams from a fuzzy problem to a clear wireframe. Fast and with everyone involved.</p>
+        <p class="team-desc" data-i18n="team.m1.desc">Leads Design Thinking workshops at BMW and SAP. Guides teams from a fuzzy problem to a clear wireframe. Fast and with everyone involved.</p>
       </div>
       <div class="team-card">
         <img class="team-avatar" src="assets/dimitri-dumonet.jpg" alt="Dimitri Dumonet" style="object-fit:cover">
         <div class="team-name-wrap">
           <a class="team-name" href="https://www.linkedin.com/in/dimitri-dumonet/" target="_blank" style="text-decoration:none;color:inherit">Dimitri Dumonet</a>
-          <div class="team-role">Serial Entrepreneur &amp; AI Operator</div>
+          <div class="team-role" data-i18n="team.m2.role">Serial Entrepreneur &amp; AI Operator</div>
         </div>
-        <p class="team-desc">10 years of starting companies from scratch. Now a full-time AI Developer and CTO enabling multiple projects.</p>
+        <p class="team-desc" data-i18n="team.m2.desc">10 years of starting companies from scratch. Now a full-time AI Developer and CTO enabling multiple projects.</p>
       </div>
       <div class="team-card">
         <img class="team-avatar" src="assets/raphael-herkommer.jpg" alt="Raphael Herkommer" style="object-fit:cover">
         <div class="team-name-wrap">
           <a class="team-name" href="https://www.linkedin.com/in/raphael-herkommer/" target="_blank" style="text-decoration:none;color:inherit">Raphael Herkommer</a>
-          <div class="team-role">Entrepreneur &amp; Psychologist</div>
+          <div class="team-role" data-i18n="team.m3.role">Entrepreneur &amp; Psychologist</div>
         </div>
-        <p class="team-desc">Entrepreneur and psychologist who has facilitated countless workshops, from team dynamics to psychological safety. Makes sure people actually open up, think boldly, and walk away changed.</p>
+        <p class="team-desc" data-i18n="team.m3.desc">Entrepreneur and psychologist who has facilitated countless workshops, from team dynamics to psychological safety. Makes sure people actually open up, think boldly, and walk away changed.</p>
       </div>
     </div>
   </div>
@@ -916,63 +942,63 @@
 <section class="section-wrap" id="pricing">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">Pricing</span>
-      <h2 class="section-title">Choose Your Sprint Format</h2>
-      <p class="section-sub">Both formats deliver a working prototype and a team that knows how to build again.</p>
+      <span class="section-label" data-i18n="price.label">Pricing</span>
+      <h2 class="section-title" data-i18n="price.title">Choose Your Sprint Format</h2>
+      <p class="section-sub" data-i18n="price.sub">Both formats deliver a working prototype and a team that knows how to build again.</p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card">
         <div class="pricing-header">
-          <h3 class="pricing-name">Prototype Sprint</h3>
-          <p class="pricing-desc">2 days of intensive, hands-on workshop for up to 10 people.</p>
+          <h3 class="pricing-name" data-i18n="price.p1.name">Prototype Sprint</h3>
+          <p class="pricing-desc" data-i18n="price.p1.desc">2 days of intensive, hands-on workshop for up to 10 people.</p>
         </div>
-        <div class="pricing-price">from €6,500</div>
+        <div class="pricing-price" data-i18n="price.p1.price">from €6,500</div>
         <div class="pricing-divider"></div>
         <div class="pricing-features">
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Full 2-day facilitation by our team</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Design thinking methodology</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>AI prototyping with Lovable.dev</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>All workshop materials and exercises</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Platform access for all participants</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Live deployment of working application</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>2 weeks post-workshop support</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f1">Full 2-day facilitation by our team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f2">Design thinking methodology</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f3">AI prototyping with Lovable.dev</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f4">All workshop materials and exercises</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f5">Platform access for all participants</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f6">Live deployment of working application</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f7">2 weeks post-workshop support</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p1.cta">Book a Discovery Call</a>
       </div>
       <div class="pricing-card">
         <div class="pricing-header">
-          <h3 class="pricing-name">Deep Dive Sprint</h3>
-          <p class="pricing-desc">5 days of comprehensive facilitation with research, testing, and deployment for up to 10 people.</p>
+          <h3 class="pricing-name" data-i18n="price.p2.name">Deep Dive Sprint</h3>
+          <p class="pricing-desc" data-i18n="price.p2.desc">5 days of comprehensive facilitation with research, testing, and deployment for up to 10 people.</p>
         </div>
-        <div class="pricing-price">from €18,000</div>
+        <div class="pricing-price" data-i18n="price.p2.price">from €18,000</div>
         <div class="pricing-divider"></div>
         <div class="pricing-features">
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Full 5-day facilitation by our team</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Design thinking methodology</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>AI prototyping with Lovable.dev</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>All workshop materials and exercises</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Platform access for all participants</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Live deployment of working application</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>4 weeks post-workshop support</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f1">Full 5-day facilitation by our team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f2">Design thinking methodology</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f3">AI prototyping with Lovable.dev</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f4">All workshop materials and exercises</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f5">Platform access for all participants</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f6">Live deployment of working application</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f7">4 weeks post-workshop support</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p2.cta">Book a Discovery Call</a>
       </div>
       <div class="pricing-card featured">
-        <div class="pricing-badge">MOST FLEXIBLE</div>
+        <div class="pricing-badge" data-i18n="price.p3.badge">MOST FLEXIBLE</div>
         <div class="pricing-header">
-          <h3 class="pricing-name">Custom Workshop</h3>
-          <p class="pricing-desc">More than 10 people, or want a different setup? We talk beforehand to understand your challenge, then design a workshop tailored to your team.</p>
+          <h3 class="pricing-name" data-i18n="price.p3.name">Custom Workshop</h3>
+          <p class="pricing-desc" data-i18n="price.p3.desc">More than 10 people, or want a different setup? We talk beforehand to understand your challenge, then design a workshop tailored to your team.</p>
         </div>
-        <div class="pricing-price">Let's talk</div>
+        <div class="pricing-price" data-i18n="price.p3.price">Let's talk</div>
         <div class="pricing-divider"></div>
         <div class="pricing-features">
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Pre-workshop discovery call to define scope</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Flexible duration, from 1 to 5 days</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Tailored exercises for your industry and team</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Focus on your specific problem and goals</span></div>
-          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Custom post-workshop support package</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f1">Pre-workshop discovery call to define scope</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f2">Flexible duration, from 1 to 5 days</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f3">Tailored exercises for your industry and team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f4">Focus on your specific problem and goals</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f5">Custom post-workshop support package</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p3.cta">Book a Discovery Call</a>
       </div>
     </div>
   </div>
@@ -982,50 +1008,50 @@
 <section class="section-wrap faq-wrap" id="faq">
   <div class="section-inner">
     <div class="section-header">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-title">Frequently Asked Questions</h2>
-      <p class="section-sub">Everything you need to know about the AI Prototyping Workshop.</p>
+      <span class="section-label" data-i18n="faq.label">FAQ</span>
+      <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+      <p class="section-sub" data-i18n="faq.sub">Everything you need to know about the AI Prototyping Workshop.</p>
     </div>
     <div class="faq-list">
       <details class="faq-item">
-        <summary>What exactly happens in the 2-day workshop?</summary>
-        <div class="faq-answer">Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a wireframe of how the app will look and work. Day 2 is hands-on AI prototyping using Lovable.dev. Your team takes the wireframe and builds a working application from it, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process.</div>
+        <summary data-i18n="faq.q1">What exactly happens in the 2-day workshop?</summary>
+        <div class="faq-answer" data-i18n="faq.a1">Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a wireframe of how the app will look and work. Day 2 is hands-on AI prototyping using Lovable.dev. Your team takes the wireframe and builds a working application from it, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process.</div>
       </details>
       <details class="faq-item">
-        <summary>Do participants need programming experience?</summary>
-        <div class="faq-answer">No. Your team does not need any technical knowledge. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps.</div>
+        <summary data-i18n="faq.q2">Do participants need programming experience?</summary>
+        <div class="faq-answer" data-i18n="faq.a2">No. Your team does not need any technical knowledge. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps.</div>
       </details>
       <details class="faq-item">
-        <summary>What tool do you use to build the prototype?</summary>
-        <div class="faq-answer">We use tools like Lovable.dev, an AI-powered application builder that turns natural language into fully functional web applications. It requires no technical knowledge and handles all the heavy lifting for you: deployment, authentication, databases, and hosting. Your team focuses on the idea, Lovable takes care of the rest.</div>
+        <summary data-i18n="faq.q3">What tool do you use to build the prototype?</summary>
+        <div class="faq-answer" data-i18n="faq.a3">We use tools like Lovable.dev, an AI-powered application builder that turns natural language into fully functional web applications. It requires no technical knowledge and handles all the heavy lifting for you: deployment, authentication, databases, and hosting. Your team focuses on the idea, Lovable takes care of the rest.</div>
       </details>
       <details class="faq-item">
-        <summary>What kinds of problems has the workshop solved?</summary>
-        <div class="faq-answer">Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. A founder automated hours of weekly research into a single tool. The workshop works best with a specific, real internal problem your team faces.</div>
+        <summary data-i18n="faq.q4">What kinds of problems has the workshop solved?</summary>
+        <div class="faq-answer" data-i18n="faq.a4">Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. A founder automated hours of weekly research into a single tool. The workshop works best with a specific, real internal problem your team faces.</div>
       </details>
       <details class="faq-item">
-        <summary>How many people can join?</summary>
-        <div class="faq-answer">The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches.</div>
+        <summary data-i18n="faq.q5">How many people can join?</summary>
+        <div class="faq-answer" data-i18n="faq.a5">The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches.</div>
       </details>
       <details class="faq-item">
-        <summary>What's the difference between the 2-day and 5-day format?</summary>
-        <div class="faq-answer">The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds more fundamental knowledge, more iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team.</div>
+        <summary data-i18n="faq.q6">What's the difference between the 2-day and 5-day format?</summary>
+        <div class="faq-answer" data-i18n="faq.a6">The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds more fundamental knowledge, more iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team.</div>
       </details>
       <details class="faq-item">
-        <summary>Can the workshop be run remotely?</summary>
-        <div class="faq-answer">No. The workshop is designed for in-person delivery to maximize collaboration and impact.</div>
+        <summary data-i18n="faq.q7">Can the workshop be run remotely?</summary>
+        <div class="faq-answer" data-i18n="faq.a7">No. The workshop is designed for in-person delivery to maximize collaboration and impact.</div>
       </details>
       <details class="faq-item">
-        <summary>How quickly do teams see results?</summary>
-        <div class="faq-answer">By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. Since everything is built using natural language, the skills transfer is immediate. We also hand out all workshop materials, so participants leave knowing how to repeat the process by themselves.</div>
+        <summary data-i18n="faq.q8">How quickly do teams see results?</summary>
+        <div class="faq-answer" data-i18n="faq.a8">By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. Since everything is built using natural language, the skills transfer is immediate. We also hand out all workshop materials, so participants leave knowing how to repeat the process by themselves.</div>
       </details>
       <details class="faq-item">
-        <summary>What industries is this workshop for?</summary>
-        <div class="faq-answer">The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, consulting firms, and innovation teams.</div>
+        <summary data-i18n="faq.q9">What industries is this workshop for?</summary>
+        <div class="faq-answer" data-i18n="faq.a9">The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, consulting firms, and innovation teams.</div>
       </details>
       <details class="faq-item">
-        <summary>How does Design Thinking fit into an AI workshop?</summary>
-        <div class="faq-answer">Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months.</div>
+        <summary data-i18n="faq.q10">How does Design Thinking fit into an AI workshop?</summary>
+        <div class="faq-answer" data-i18n="faq.a10">Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months.</div>
       </details>
     </div>
   </div>
@@ -1035,13 +1061,231 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <span class="footer-brand">Workshoppers</span>
-    <p class="footer-text">AI Prototyping Workshops · Design Thinking + AI · Munich, Germany</p>
-    <p class="footer-text">&copy; 2026 Workshoppers. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Book a Discovery Call</a></p>
+    <p class="footer-text" data-i18n="footer.tagline">AI Prototyping Workshops · Design Thinking + AI · Munich, Germany</p>
+    <p class="footer-text" data-i18n="footer.copy">&copy; 2026 Workshoppers. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Book a Discovery Call</a></p>
   </div>
 </footer>
 
 <script>
+(function() {
   document.querySelector('.hero-video').playbackRate = 0.5;
+
+  var T = {
+    // ── Meta ──
+    '_meta_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen · Workshoppers',
+    '_meta_desc': 'Euer Team löst ein echtes Problem mit AI + Design Thinking — und geht mit einem fertigen Produkt nach Hause. 2- oder 5-Tage-Workshop. DACH-Region.',
+    '_og_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
+    '_og_desc': 'Euer Team löst ein echtes Problem mit AI + Design Thinking — und geht mit einem fertigen Produkt nach Hause. Workshop für Unternehmensteams.',
+    '_tw_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
+    '_tw_desc': 'AI trifft Design Thinking — euer Team baut in wenigen Tagen eine echte, funktionierende Lösung. Erstgespräch buchen.',
+
+    // ── Nav ──
+    'nav.how': 'So funktioniert\u2019s',
+    'nav.learn': 'Was ihr lernt',
+    'nav.team': 'Team',
+    'nav.pricing': 'Preise',
+    'nav.results': 'Ergebnisse',
+    'nav.faq': 'FAQ',
+    'cta.book': 'Erstgespr\u00e4ch buchen',
+
+    // ── Hero ──
+    'hero.badge': 'Einzigartiger Workshop',
+    'hero.title': 'Nutzt AI und<br><em>Design Thinking</em><br>um eure eigenen L\u00f6sungen zu bauen',
+    'hero.sub': 'AI trifft Design Thinking \u2014 euer Team baut in wenigen Tagen eine echte, funktionierende L\u00f6sung. Innovieren. Bauen. Dazulernen.',
+    'hero.cta': 'Erstgespr\u00e4ch buchen',
+
+    // ── Problem ──
+    'problem.label': 'Das Problem',
+    'problem.title': 'Die meisten Teams wissen genau,<br>was sie ausbremst',
+    'problem.sub': 'Das Problem ist nicht, das Problem zu erkennen \u2014 sondern die Zeit, die Tools und die Methode zu finden, um wirklich etwas dagegen zu tun. Und so bleibt es auf der Liste. Quartal f\u00fcr Quartal.',
+    'problem.card.sub': 'Was w\u00e4re, wenn ihr es<br>einfach\u2026 l\u00f6sen k\u00f6nntet?',
+    'problem.card.main': 'Diese Woche.',
+
+    // ── How It Works ──
+    'how.label': 'So funktioniert\u2019s',
+    'how.title': 'Wir unterrichten AI nicht in der Theorie.<br>Wir geben eurem Team ein Ziel.',
+    'how.sub': 'Weil man neue Skills nicht in Kursen lernt. Sondern mit einem Projekt, einer Deadline und einem Ergebnis, das sich lohnt.',
+    'how.s1.title': 'Das Problem verstehen',
+    'how.s1.desc': 'Euer Team nutzt Design Thinking, um die Herausforderung wirklich zu verstehen: Wen betrifft sie? Warum ist sie wichtig? Und wie sieht eine echte L\u00f6sung aus?',
+    'how.s1.tag': 'Teil 1 \u2014 Design Thinking',
+    'how.s2.title': 'Bauen mit AI',
+    'how.s2.desc': 'Mit AI-Tools wie Lovable.dev baut euer Team einen funktionierenden Prototyp. Kein Mockup \u2014 eine echte Anwendung, die das Problem l\u00f6st.',
+    'how.s2.tag': 'Teil 2 \u2014 AI Prototyping',
+    'how.s3.title': 'Die Skills behalten',
+    'how.s3.desc': 'Am Ende hat euer Team nicht nur einen funktionierenden Prototyp. Sondern auch das Wissen, es wieder zu tun. Alleine. Ohne uns.',
+    'how.s3.tag': 'Ergebnis',
+
+    // ── Skills ──
+    'learn.label': 'Skills',
+    'learn.title': 'Was euer Team durch Machen lernt',
+    'learn.sub': 'Praktische Skills, die euer Team sofort einsetzt \u2014 und auch lange nach dem Workshop noch nutzt.',
+    'learn.c1.title': 'AI-Tools souver\u00e4n einsetzen',
+    'learn.c1.desc': 'Und ihre Grenzen kennen. Verstehen, was AI kann und was nicht \u2014 und sie gezielt einsetzen.',
+    'learn.c2.title': 'Komplexe Probleme zerlegen',
+    'learn.c2.desc': 'Mit Design Thinking eine vage Herausforderung in etwas Baubares verwandeln.',
+    'learn.c3.title': 'Prompten, iterieren, bauen',
+    'learn.c3.desc': 'Funktionierende Anwendungen nur mit nat\u00fcrlicher Sprache bauen. Keine Programmierkenntnisse n\u00f6tig.',
+    'learn.c4.title': 'Den Prozess wiederholen',
+    'learn.c4.desc': 'F\u00fcr das n\u00e4chste Problem. Und das danach. Die Methode geh\u00f6rt euch.',
+
+    // ── Testimonials ──
+    'test.label': 'Stimmen',
+    'test.title': 'Was Teams nach<br>dem Workshop sagen',
+    'test.q1': '\u201eKeine Folien, nur praktische Arbeit an einem echten Ziel. Wir haben gelernt, welche AI-Tools zu unserer Situation passen \u2014 und sie dann direkt eingesetzt. So bildet man ein Team weiter und verbessert gleichzeitig Prozesse.\u201c',
+    'test.r1': 'CEO Wayra Germany / Telefonica',
+    'test.q2': '\u201eIch bin keine Entwicklerin, ich bin Marketerin. Aber am Ende des Workshops hatte ich mit eigenen H\u00e4nden einen funktionierenden Prototyp gebaut. Das war surreal \u2014 und hat komplett ver\u00e4ndert, wie ich \u00fcber die M\u00f6glichkeiten von AI denke.\u201c',
+    'test.r2': 'Head of Marketing, Wayra Germany / Telefonica',
+    'test.q3': '\u201eAm Ende von Tag zwei hatte ich eine funktionierende App, die ein echtes Problem meines Teams l\u00f6st. Der Workshop hat mir das Selbstvertrauen und die Methode gegeben, weiterzubauen. Seitdem habe ich zwei weitere Tools gebaut.\u201c',
+    'test.r3': 'Gr\u00fcnder, Flygaroo',
+
+    // ── Team ──
+    'team.label': 'Eure Coaches',
+    'team.title': 'Das Team hinter<br>dem Workshop',
+    'team.sub': 'Eine einzigartige Mischung aus AI, Design Thinking und Psychologie.',
+    'team.m1.role': 'Design Thinking Experte',
+    'team.m1.desc': 'Leitet Design-Thinking-Workshops bei BMW und SAP. Bringt Teams von einem vagen Problem zu einem klaren Wireframe \u2014 schnell und mit allen Beteiligten.',
+    'team.m2.role': 'Serial Entrepreneur & AI Operator',
+    'team.m2.desc': '10 Jahre Erfahrung im Aufbau von Unternehmen. Heute Full-Time AI Developer und CTO f\u00fcr mehrere Projekte.',
+    'team.m3.role': 'Unternehmer & Psychologe',
+    'team.m3.desc': 'Unternehmer und Psychologe mit unz\u00e4hligen Workshop-Erfahrungen \u2014 von Teamdynamik bis psychologische Sicherheit. Sorgt daf\u00fcr, dass Menschen sich wirklich \u00f6ffnen, mutig denken und ver\u00e4ndert hinausgehen.',
+
+    // ── Pricing ──
+    'price.label': 'Preise',
+    'price.title': 'W\u00e4hlt euer Sprint-Format',
+    'price.sub': 'Beide Formate liefern einen funktionierenden Prototyp \u2014 und ein Team, das wei\u00df, wie es wieder geht.',
+    'price.p1.name': 'Prototype Sprint',
+    'price.p1.desc': '2 Tage intensiver, praktischer Workshop f\u00fcr bis zu 10 Personen.',
+    'price.p1.price': 'ab 6.500\u00a0\u20ac',
+    'price.p1.f1': 'Komplette 2-Tage-Moderation durch unser Team',
+    'price.p1.f2': 'Design-Thinking-Methodik',
+    'price.p1.f3': 'AI-Prototyping mit Lovable.dev',
+    'price.p1.f4': 'Alle Workshop-Materialien und \u00dcbungen',
+    'price.p1.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
+    'price.p1.f6': 'Live-Deployment der fertigen Anwendung',
+    'price.p1.f7': '2 Wochen Support nach dem Workshop',
+    'price.p1.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p2.name': 'Deep Dive Sprint',
+    'price.p2.desc': '5 Tage umfassende Begleitung mit Research, Testing und Deployment f\u00fcr bis zu 10 Personen.',
+    'price.p2.price': 'ab 18.000\u00a0\u20ac',
+    'price.p2.f1': 'Komplette 5-Tage-Moderation durch unser Team',
+    'price.p2.f2': 'Design-Thinking-Methodik',
+    'price.p2.f3': 'AI-Prototyping mit Lovable.dev',
+    'price.p2.f4': 'Alle Workshop-Materialien und \u00dcbungen',
+    'price.p2.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
+    'price.p2.f6': 'Live-Deployment der fertigen Anwendung',
+    'price.p2.f7': '4 Wochen Support nach dem Workshop',
+    'price.p2.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p3.badge': 'AM FLEXIBELSTEN',
+    'price.p3.name': 'Individueller Workshop',
+    'price.p3.desc': 'Mehr als 10 Personen oder ein anderes Setup? Wir sprechen vorher, um eure Herausforderung zu verstehen \u2014 und gestalten dann einen Workshop, der genau zu eurem Team passt.',
+    'price.p3.price': 'Lass uns sprechen',
+    'price.p3.f1': 'Vorgespr\u00e4ch zur Kl\u00e4rung des Umfangs',
+    'price.p3.f2': 'Flexible Dauer, von 1 bis 5 Tagen',
+    'price.p3.f3': 'Ma\u00dfgeschneiderte \u00dcbungen f\u00fcr eure Branche und euer Team',
+    'price.p3.f4': 'Fokus auf euer konkretes Problem und eure Ziele',
+    'price.p3.f5': 'Individuelles Support-Paket nach dem Workshop',
+    'price.p3.cta': 'Erstgespr\u00e4ch buchen',
+
+    // ── FAQ ──
+    'faq.label': 'FAQ',
+    'faq.title': 'H\u00e4ufig gestellte Fragen',
+    'faq.sub': 'Alles, was ihr \u00fcber den AI Prototyping Workshop wissen m\u00fcsst.',
+    'faq.q1': 'Was genau passiert im 2-Tage-Workshop?',
+    'faq.a1': 'Tag 1 dreht sich um Design Thinking: Euer Team definiert das Problem, erfasst die Bed\u00fcrfnisse der Nutzer und erstellt ein Wireframe der geplanten App. Tag 2 ist Hands-on AI-Prototyping mit Lovable.dev. Euer Team nimmt das Wireframe und baut daraus eine funktionierende Anwendung, testet sie und bringt sie live. Am Ende habt ihr ein fertiges Produkt \u2014 und die Skills, den Prozess zu wiederholen.',
+    'faq.q2': 'Brauchen die Teilnehmenden Programmiererfahrung?',
+    'faq.a2': 'Nein. Euer Team braucht keinerlei technisches Wissen. Ihr baut mit nat\u00fcrlicher Sprache und AI-gest\u00fctzten No-Code-Tools. Marketer, HR-Profis, Operations Manager und Product Owner haben den Workshop bereits erfolgreich absolviert und funktionierende Apps gebaut.',
+    'faq.q3': 'Mit welchem Tool wird der Prototyp gebaut?',
+    'faq.a3': 'Wir nutzen Tools wie Lovable.dev \u2014 einen AI-gest\u00fctzten Application Builder, der nat\u00fcrliche Sprache in voll funktionsf\u00e4hige Web-Apps verwandelt. Daf\u00fcr braucht man kein technisches Wissen. Lovable \u00fcbernimmt alles: Deployment, Authentifizierung, Datenbanken und Hosting. Euer Team konzentriert sich auf die Idee \u2014 Lovable k\u00fcmmert sich um den Rest.',
+    'faq.q4': 'Welche Probleme wurden im Workshop schon gel\u00f6st?',
+    'faq.a4': 'Teams haben interne Tools f\u00fcr HR-Onboarding, Operations-Dashboards, Kundenservice-Workflows, Lagerverwaltung und Projektmanagement gebaut. Ein HR-Team hat die Onboarding-Zeit halbiert. Ein Gr\u00fcnder hat stundenlange w\u00f6chentliche Recherche in ein einziges Tool automatisiert. Der Workshop funktioniert am besten mit einem konkreten, realen Problem aus eurem Arbeitsalltag.',
+    'faq.q5': 'Wie viele Personen k\u00f6nnen teilnehmen?',
+    'faq.a5': 'Das Standardformat unterst\u00fctzt bis zu 10 Teilnehmende. So bleibt der Workshop hands-on und jede Person bekommt individuelles Coaching. F\u00fcr Gruppen \u00fcber 10 Personen bieten wir individuelle Workshops mit angepasster Moderation und zus\u00e4tzlichen Coaches.',
+    'faq.q6': 'Was ist der Unterschied zwischen dem 2-Tage- und dem 5-Tage-Format?',
+    'faq.a6': 'Der 2-Tage Prototype Sprint liefert ein funktionierendes MVP. Der 5-Tage Deep Dive bringt zus\u00e4tzlich mehr Grundlagenwissen, mehr Iterationszyklen, gr\u00fcndliches Testing und ein ausgereifteres Endprodukt. Das 5-Tage-Format ist ideal f\u00fcr komplexe Probleme oder wenn ihr einen tieferen Skill-Transfer im Team wollt.',
+    'faq.q7': 'Kann der Workshop auch remote stattfinden?',
+    'faq.a7': 'Nein. Der Workshop ist f\u00fcr die Durchf\u00fchrung vor Ort konzipiert, um maximale Zusammenarbeit und Wirkung zu erzielen.',
+    'faq.q8': 'Wie schnell sehen Teams Ergebnisse?',
+    'faq.a8': 'Am Ende von Tag 2 hat euer Team einen funktionierenden Prototyp, der deployed und einsatzbereit ist. Viele Teams fangen sofort an, das Tool zu nutzen. Da alles mit nat\u00fcrlicher Sprache gebaut wird, ist der Skill-Transfer unmittelbar. Wir geben au\u00dferdem alle Workshop-Materialien mit, sodass die Teilnehmenden den Prozess selbstst\u00e4ndig wiederholen k\u00f6nnen.',
+    'faq.q9': 'F\u00fcr welche Branchen ist der Workshop geeignet?',
+    'faq.a9': 'Der Workshop funktioniert branchen\u00fcbergreifend. Wir haben Erfahrung mit Automotive (BMW-\u00d6kosystem), Enterprise SaaS, Fintech, HR-lastigen Organisationen, Mittelstand-Fertigung, Logistik, Beratungsfirmen und Innovationsteams.',
+    'faq.q10': 'Wie passt Design Thinking in einen AI-Workshop?',
+    'faq.a10': 'Design Thinking stellt sicher, dass ihr das Richtige baut, bevor ihr es schnell baut. Ohne diesen Schritt springen Teams zu L\u00f6sungen, die am eigentlichen Problem vorbeigehen. Genau diese Kombination macht den Workshop einzigartig: Design Thinking definiert, was gebaut werden soll \u2014 AI-Tools bauen es in Stunden statt Monaten.',
+
+    // ── Footer ──
+    'footer.tagline': 'AI Prototyping Workshops \u00b7 Design Thinking + AI \u00b7 M\u00fcnchen, Deutschland',
+    'footer.copy': '&copy; 2026 Workshoppers. Alle Rechte vorbehalten. \u00b7 <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Erstgespr\u00e4ch buchen</a>'
+  };
+
+  // Cache original English meta values
+  var metaCache = {
+    title: document.title,
+    desc: document.querySelector('meta[name="description"]').content,
+    ogTitle: document.querySelector('meta[property="og:title"]').content,
+    ogDesc: document.querySelector('meta[property="og:description"]').content,
+    twTitle: document.querySelector('meta[name="twitter:title"]').content,
+    twDesc: document.querySelector('meta[name="twitter:description"]').content
+  };
+
+  // Cache original English innerHTML for all i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    el.setAttribute('data-i18n-en', el.innerHTML);
+  });
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+
+    // Update meta tags
+    if (lang === 'de') {
+      document.title = T['_meta_title'];
+      document.querySelector('meta[name="description"]').content = T['_meta_desc'];
+      document.querySelector('meta[property="og:title"]').content = T['_og_title'];
+      document.querySelector('meta[property="og:description"]').content = T['_og_desc'];
+      document.querySelector('meta[property="og:locale"]').content = 'de_DE';
+      document.querySelector('meta[name="twitter:title"]').content = T['_tw_title'];
+      document.querySelector('meta[name="twitter:description"]').content = T['_tw_desc'];
+    } else {
+      document.title = metaCache.title;
+      document.querySelector('meta[name="description"]').content = metaCache.desc;
+      document.querySelector('meta[property="og:title"]').content = metaCache.ogTitle;
+      document.querySelector('meta[property="og:description"]').content = metaCache.ogDesc;
+      document.querySelector('meta[property="og:locale"]').content = 'en_US';
+      document.querySelector('meta[name="twitter:title"]').content = metaCache.twTitle;
+      document.querySelector('meta[name="twitter:description"]').content = metaCache.twDesc;
+    }
+
+    // Translate all data-i18n elements
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (lang === 'de' && T[key]) {
+        el.innerHTML = T[key];
+      } else {
+        var orig = el.getAttribute('data-i18n-en');
+        if (orig !== null) el.innerHTML = orig;
+      }
+    });
+
+    // Update toggle UI
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    // Persist
+    localStorage.setItem('lang', lang);
+
+    // Reveal page
+    document.documentElement.classList.remove('i18n-loading');
+  }
+
+  // Bind toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  // Initial apply
+  setLang(document.documentElement.lang || 'en');
+})();
 </script>
 
 </body>
