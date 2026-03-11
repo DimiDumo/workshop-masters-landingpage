@@ -271,7 +271,7 @@
 
     /* ── TESTIMONIALS ────────────────────────────────── */
     .testimonials-wrap { background: #F1F5F9; }
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .testimonial-card {
       background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
       padding: 32px; display: flex; flex-direction: column; gap: 20px;
@@ -374,6 +374,7 @@
   <a href="index.html" class="active">V1</a>
   <a href="../v2/index.html">V2</a>
   <a href="../v3/index.html">V3</a>
+  <a href="../v4/index.html">V4</a>
 </div>
 
 <!-- HEADER -->
@@ -383,7 +384,7 @@
       <div class="logo-mark">
         <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       </div>
-      <span class="logo-text">Signal &amp; Spark</span>
+      <span class="logo-text">Workshoppers</span>
     </div>
     <nav>
       <a href="#how-it-works">How It Works</a>
@@ -393,7 +394,7 @@
       <a href="#testimonials">Results</a>
     </nav>
     <div>
-      <a href="#pricing" class="cta-btn">Book a Discovery Call</a>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn">Book a Discovery Call</a>
     </div>
   </div>
 </header>
@@ -414,7 +415,7 @@
     <div class="hero-cta-wrap" id="v1-cta">
       <div class="hero-cta-pill">
         <input type="email" placeholder="Enter your work email">
-        <button class="hero-cta-btn">Book a Discovery Call</button>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block">Book a Discovery Call</a>
       </div>
       <div class="trust-row">
         <span class="trust-count">1,020+ Reviews</span>
@@ -521,22 +522,32 @@
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <p class="testimonial-quote">"We came in with a vague idea and left with a working app our team actually uses. The method clicked instantly — we've already run two more sprints on our own."</p>
+        <p class="testimonial-quote">"No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation — and then used them. That's how you upskill a team and improve processes at the same time."</p>
         <div class="t-author">
-          <div class="avatar" style="background:#4F46E5">JM</div>
+          <img class="avatar" src="assets/florian-bogenschuetz.jpg" alt="Florian Bogenschütz" style="object-fit:cover">
           <div class="author-info">
-            <span class="author-name">Julia Meier</span>
-            <span class="author-role">Head of Product, SaaS Startup</span>
+            <span class="author-name">Florian Bogenschütz</span>
+            <span class="author-role">CEO Wayra Germany / Telefonica</span>
           </div>
         </div>
       </div>
       <div class="testimonial-card">
-        <p class="testimonial-quote">"I was skeptical about building anything useful in two days. By the end, our team had deployed a live tool that saved our ops team 6 hours a week. The confidence boost was even bigger than the prototype."</p>
+        <p class="testimonial-quote">"I'm not a developer — I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI."</p>
         <div class="t-author">
-          <div class="avatar" style="background:#818CF8">TB</div>
+          <img class="avatar" src="assets/franziska-kraft.jpg" alt="Franziska Kraft" style="object-fit:cover">
           <div class="author-info">
-            <span class="author-name">Thomas Berger</span>
-            <span class="author-role">VP Engineering, Enterprise Fintech</span>
+            <span class="author-name">Franziska Kraft</span>
+            <span class="author-role">Head of Marketing, Wayra Germany / Telefonica</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building — I've shipped two more tools since."</p>
+        <div class="t-author">
+          <img class="avatar" src="assets/nicolas-gutierrez.jpg" alt="Nicolas Gutierrez" style="object-fit:cover">
+          <div class="author-info">
+            <span class="author-name">Nicolas Gutierrez</span>
+            <span class="author-role">Founder, Flygaroo</span>
           </div>
         </div>
       </div>
@@ -553,6 +564,7 @@
     </div>
     <div class="carousel-dots">
       <div class="dot active"></div>
+      <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
@@ -626,7 +638,7 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Live deployment of working application</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>2 weeks post-workshop support</span></div>
         </div>
-        <a href="#" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
       </div>
       <div class="pricing-card">
         <div class="pricing-header">
@@ -644,7 +656,7 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Live deployment of working application</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>4 weeks post-workshop support</span></div>
         </div>
-        <a href="#" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
       </div>
       <div class="pricing-card featured">
         <div class="pricing-badge">MOST FLEXIBLE</div>
@@ -661,7 +673,7 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Focus on your specific problem and goals</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Custom post-workshop support package</span></div>
         </div>
-        <a href="#" class="pricing-cta">Book a Discovery Call</a>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta">Book a Discovery Call</a>
       </div>
     </div>
   </div>
