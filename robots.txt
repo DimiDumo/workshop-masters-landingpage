@@ -1,4 +1,4 @@
-# robots.txt — Signal & Spark AI Prototyping Workshop
+# robots.txt — Workshoppers AI Prototyping Workshop
 
 User-agent: Googlebot
 Allow: /

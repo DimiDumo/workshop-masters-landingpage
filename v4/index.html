@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI & Design Workshop — Version 2</title>
+  <title>AI & Design Workshop — Version 4</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Rubik:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -86,81 +86,195 @@
     }
     .cta-btn:hover { background: #4338CA; transform: translateY(-1px); }
 
-    /* ── HERO V2 ─────────────────────────────────────── */
-    @keyframes v2SlideUp {
-      from { opacity: 0; transform: translateY(60px); }
+    /* ── HERO V4 ─────────────────────────────────────── */
+    @keyframes v1FadeUp {
+      from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* Tile color cycle: light blue → lavender → soft pink → near-white → repeat */
+    @keyframes tileColor {
+      0%   { background: hsl(222, 52%, 89%); }
+      30%  { background: hsl(250, 52%, 86%); }
+      55%  { background: hsl(278, 45%, 88%); }
+      80%  { background: hsl(210, 35%, 95%); }
+      100% { background: hsl(222, 52%, 89%); }
+    }
+
+    @keyframes sparklePulse {
+      0%, 100% { opacity: 0.25; transform: scale(0.85); }
+      50%       { opacity: 0.6;  transform: scale(1.1); }
+    }
+
     .hero-section {
       position: relative;
       overflow: hidden;
       min-height: 100vh;
-      background: #21346e;
+      background: #fff;
+      display: flex;
+      align-items: center;
     }
-    .hero-video {
+
+    /* Tile grid — auto height from square tiles */
+    .tile-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      gap: 10px;
+      padding: 10px;
+      z-index: 0;
+    }
+
+    .tile {
+      aspect-ratio: 1;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      /* Subtle border for glass edge */
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      /* Inner top highlight + soft drop shadow */
+      box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 2px 6px rgba(140, 120, 200, 0.08);
+      animation: tileColor 7s ease-in-out infinite;
+      /* Negative delay starts tiles mid-cycle — no white flash on load.
+         Formula: -(col + row) * step creates diagonal wave from top-left. */
+      animation-delay: calc((var(--col) + var(--row)) * -0.44s);
+    }
+
+    /* Radial highlight overlay — gives glass/frosted look */
+    .tile::before {
+      content: '';
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      opacity: 0.65;
+      border-radius: inherit;
+      background: radial-gradient(
+        circle at 32% 28%,
+        rgba(255, 255, 255, 0.55) 0%,
+        rgba(255, 255, 255, 0)    65%
+      );
+      pointer-events: none;
+    }
+
+    /* Sparkle decorations scattered across tile area */
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      animation: sparklePulse 3.2s ease-in-out infinite;
+      animation-delay: var(--sd, 0s);
+    }
+    .sparkle svg {
+      display: block;
+      fill: none;
+      stroke: rgba(120, 100, 200, 0.45);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.88) 35%, white 60%);
+      z-index: 2;
     }
     .hero {
       position: relative;
-      z-index: 2;
+      z-index: 3;
+      width: 100%;
       max-width: 1440px;
       margin: 0 auto;
-      padding: 192px 64px 80px;
+      padding: 100px 64px 64px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 48px;
-    }
-    .hero-lines { display: flex; flex-direction: column; }
-    .hero-line {
-      display: block;
-      font-family: 'Rubik', sans-serif;
-      font-size: clamp(60px, 7vw, 100px);
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #fff;
-      line-height: 0.98;
-      letter-spacing: -3px;
-    }
-    .hero-line:nth-child(1) { animation: v2SlideUp 0.7s ease-out 0s both; }
-    .hero-line:nth-child(2) { animation: v2SlideUp 0.7s ease-out 0.15s both; }
-    .hero-line:nth-child(3) { animation: v2SlideUp 0.7s ease-out 0.30s both; }
-    .v2-cta {
-      position: relative;
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 184px;
-      height: 65px;
-      text-decoration: none;
-      transition: transform 0.2s ease;
+      gap: 20px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(79,70,229,0.063);
+      border: 1px solid rgba(79,70,229,0.19);
+      border-radius: 100px; padding: 8px 20px;
+      animation: v1FadeUp 0.6s ease-out 0s both;
+    }
+    .badge-dot { width: 8px; height: 8px; background: #4F46E5; border-radius: 50%; }
+    .badge-text { font-size: 13px; font-weight: 500; color: #6366F1; }
+    .hero-title {
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      color: #0F172A;
+      text-align: center;
+      animation: v1FadeUp 0.6s ease-out 0.12s both;
+    }
+    .hero-title em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(46px, 6.5vw, 86px);
+      line-height: 1.0;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(55, 58, 70, 0.8);
+      max-width: 520px;
+      text-align: center;
+      animation: v1FadeUp 0.6s ease-out 0.24s both;
+    }
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: v1FadeUp 0.6s ease-out 0.36s both;
+    }
+    .hero-cta-pill {
+      display: flex;
+      align-items: center;
+      background: #fcfcfc;
+      border: 1px solid #e5e7eb;
+      border-radius: 40px;
+      box-shadow: 0px 10px 40px 5px rgba(194,194,194,0.25);
+      padding: 6px;
+    }
+    .hero-cta-pill input {
+      border: none;
+      background: transparent;
+      padding: 11px 20px;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 15px;
+      color: #374151;
+      outline: none;
+      min-width: 240px;
+    }
+    .hero-cta-pill input::placeholder { color: #9ca3af; }
+    .hero-cta-btn {
+      background: #0f172a;
+      color: #fff;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 34px;
+      border: none;
       cursor: pointer;
-      animation: v2SlideUp 0.7s ease-out 0.5s both;
+      white-space: nowrap;
+      box-shadow: inset -4px -6px 25px 0px rgba(201,201,201,0.08), inset 4px 4px 10px 0px rgba(29,29,29,0.24);
+      transition: opacity 0.15s, transform 0.15s;
     }
-    .v2-cta:hover { transform: scale(1.05); }
-    .v2-cta:active { transform: scale(0.95); }
-    .v2-cta-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .v2-cta span {
-      position: relative;
-      z-index: 1;
-      font-family: 'Rubik', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      text-transform: uppercase;
-      color: #161a20;
-      letter-spacing: 0.5px;
-    }
+    .hero-cta-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .trust-row { display: flex; align-items: center; gap: 16px; }
+    .trust-count { font-size: 12px; color: #6b7280; font-weight: 500; }
+    .trust-logos { display: flex; align-items: center; gap: 16px; }
+    .trust-logos span { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #94A3B8; }
 
     /* ── SECTION BASE ────────────────────────────────── */
     .section-wrap { width: 100%; }
@@ -297,17 +411,26 @@
     @media (max-width: 1024px) {
       .header-inner { padding: 16px 24px; }
       nav { display: none; }
-      .hero { padding: 120px 24px 60px; }
+      .hero { padding: 0 24px 60px; }
+      .hero-title { font-size: 48px; }
+      .hero-title em { font-size: 60px; }
+      .hero-cta-pill { flex-direction: column; border-radius: 20px; }
+      .hero-cta-pill input { min-width: unset; width: 100%; }
       .section-inner { padding: 60px 24px; }
       .section-title { font-size: 34px; }
       .steps-grid, .testimonials-grid, .team-grid, .pricing-grid { grid-template-columns: 1fr; }
       .learn-grid { grid-template-columns: 1fr; }
+      .tile-grid { grid-template-columns: repeat(7, 1fr); }
     }
     @media (max-width: 640px) {
-      .hero-line { letter-spacing: -1px; }
+      .hero-title { font-size: 36px; letter-spacing: -0.03em; }
+      .hero-title em { font-size: 46px; }
+      .hero-sub { font-size: 16px; }
+      .trust-row { flex-direction: column; gap: 8px; }
       .section-title { font-size: 26px; }
       .card-main { font-size: 36px; }
       .logos-row { gap: 28px; flex-wrap: wrap; }
+      .tile-grid { grid-template-columns: repeat(5, 1fr); }
     }
   </style>
 </head>
@@ -318,9 +441,9 @@
   <a href="../index.html">Hub</a>
   <span class="sep">·</span>
   <a href="../v1/index.html">V1</a>
-  <a href="index.html" class="active">V2</a>
+  <a href="../v2/index.html">V2</a>
   <a href="../v3/index.html">V3</a>
-  <a href="../v4/index.html">V4</a>
+  <a href="index.html" class="active">V4</a>
 </div>
 
 <!-- HEADER -->
@@ -347,21 +470,53 @@
 
 <!-- HERO -->
 <section class="hero-section">
-  <video class="hero-video" autoplay loop muted playsinline>
-    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260206_044704_dd33cb15-c23f-4cfc-aa09-a0465d4dcb54.mp4" type="video/mp4">
-  </video>
+  <!-- Animated tile grid (replaces video) -->
+  <div class="tile-grid" id="tileGrid"></div>
+
+  <!-- Sparkle decorations -->
+  <div class="sparkle" style="top:6%;left:8%;--sd:0s">
+    <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:14%;left:38%;--sd:0.8s">
+    <svg width="14" height="14" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:4%;left:62%;--sd:1.4s">
+    <svg width="16" height="16" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:22%;left:78%;--sd:0.4s">
+    <svg width="12" height="12" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:10%;left:92%;--sd:1.8s">
+    <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:30%;left:55%;--sd:2.2s">
+    <svg width="12" height="12" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+  <div class="sparkle" style="top:18%;left:20%;--sd:1.1s">
+    <svg width="14" height="14" viewBox="0 0 18 18"><path d="M9 1 L9.8 7.5 L16 9 L9.8 10.5 L9 17 L8.2 10.5 L2 9 L8.2 7.5 Z"/></svg>
+  </div>
+
+  <div class="hero-overlay"></div>
   <div class="hero">
-    <div class="hero-lines">
-      <span class="hero-line" id="v2-line1">USE AI &amp;</span>
-      <span class="hero-line" id="v2-line2">DESIGN THINKING</span>
-      <span class="hero-line" id="v2-line3">TO BUILD SOLUTIONS</span>
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">First of its kind Workshop</span>
     </div>
-    <a href="#pricing" class="v2-cta">
-      <svg class="v2-cta-bg" viewBox="0 0 184 65" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 0C14.327 0 0 14.327 0 32.5C0 50.673 14.327 65 32 65H152C169.673 65 184 50.673 184 32.5C184 14.327 169.673 0 152 0H32Z" fill="white"/>
-      </svg>
-      <span>BOOK A CALL</span>
-    </a>
+    <h1 class="hero-title">Use AI and<br><em>Design Thinking</em></h1>
+    <p class="hero-sub">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
+    <div class="hero-cta-wrap">
+      <div class="hero-cta-pill">
+        <input type="email" placeholder="Enter your work email">
+        <button class="hero-cta-btn">Book a Discovery Call</button>
+      </div>
+      <div class="trust-row">
+        <div class="trust-logos">
+          <span>BMW</span>
+          <span>SAP</span>
+          <span>O2</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -422,25 +577,21 @@
     </div>
     <div class="learn-grid">
       <div class="learn-card">
-        <!-- sparkles -->
         <svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
         <h3 class="learn-title">Use AI tools confidently</h3>
         <p class="learn-desc">And know their limits. Understand what AI can and can't do — so you use it wisely.</p>
       </div>
       <div class="learn-card">
-        <!-- puzzle -->
         <svg viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 2c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z"/></svg>
         <h3 class="learn-title">Break messy problems down</h3>
         <p class="learn-desc">Turn a vague challenge into something buildable using Design Thinking.</p>
       </div>
       <div class="learn-card">
-        <!-- message-square -->
         <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         <h3 class="learn-title">Prompt, iterate, and build</h3>
         <p class="learn-desc">Build working applications using just natural language — no coding experience required.</p>
       </div>
       <div class="learn-card accent">
-        <!-- repeat -->
         <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
         <h3 class="learn-title">Run the process again</h3>
         <p class="learn-desc">For the next problem, and the one after that. The method is yours to keep.</p>
@@ -604,7 +755,20 @@
   </div>
 </section>
 
-<!-- V2 animations are pure CSS @keyframes — no script needed -->
+<script>
+  // Generate 13×5 tile grid with CSS custom properties for diagonal stagger
+  const grid = document.getElementById('tileGrid');
+  const COLS = 13, ROWS = 5;
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const t = document.createElement('div');
+      t.className = 'tile';
+      t.style.setProperty('--col', c);
+      t.style.setProperty('--row', r);
+      grid.appendChild(t);
+    }
+  }
+</script>
 
 </body>
 </html>
