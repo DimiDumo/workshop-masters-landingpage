@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI & Design Workshop — Version 1</title>
+  <title>AI Prototyping Workshop | Build a Working App in 2 Days · Signal &amp; Spark</title>
+  <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Book a discovery call.">
+  <link rel="canonical" href="https://www.yoursite.com/v1/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
+  <meta property="og:description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop for corporate teams.">
+  <meta property="og:url" content="https://www.yoursite.com/v1/">
+  <meta property="og:site_name" content="Signal &amp; Spark">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
+  <meta name="twitter:description" content="AI meets Design Thinking — your team builds a real, functional solution in just a few days. Book a discovery call.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -340,6 +352,72 @@
     }
     .pricing-cta:hover { background: #4338CA; transform: translateY(-1px); }
 
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-wrap { background: #fff; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto; width: 100%; }
+    .faq-item { border-bottom: 1px solid #E2E8F0; }
+    .faq-item:first-child { border-top: 1px solid #E2E8F0; }
+    .faq-item summary {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #0F172A;
+      padding: 24px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 22px;
+      font-weight: 400;
+      color: #94A3B8;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+    .faq-answer {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #64748B;
+      padding: 0 0 24px;
+      max-width: 720px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    .site-footer {
+      background: #0F172A;
+      padding: 40px 64px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .footer-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+    .footer-text a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-text a:hover { color: #fff; }
+
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1024px) {
       .header-inner { padding: 16px 24px; }
@@ -362,8 +440,232 @@
       .section-title { font-size: 26px; }
       .card-main { font-size: 36px; }
       .logos-row { gap: 28px; flex-wrap: wrap; }
+      .site-footer { padding: 32px 24px; }
     }
   </style>
+
+  <!-- Schema.org: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Signal & Spark",
+    "description": "AI Prototyping Workshops combining Design Thinking and AI for corporate teams in the DACH region.",
+    "url": "https://www.yoursite.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/signal-and-spark"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "availableLanguage": ["English", "German"]
+    }
+  }
+  </script>
+
+  <!-- Schema.org: Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Prototyping Workshop",
+    "description": "A hands-on 2-day or 5-day workshop where corporate teams use Design Thinking and AI tools to build a real, working internal solution. No coding required.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Signal & Spark"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Germany" },
+      { "@type": "Country", "name": "Austria" },
+      { "@type": "Country", "name": "Switzerland" }
+    ],
+    "serviceType": "AI Workshop / Corporate Training",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Prototype Sprint",
+        "description": "2 days of intensive, hands-on AI prototyping workshop for up to 10 people.",
+        "price": "6500",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Deep Dive Sprint",
+        "description": "5 days of comprehensive facilitation with research, testing, and deployment for up to 10 people.",
+        "price": "18000",
+        "priceCurrency": "EUR"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What exactly happens in the 2-day AI prototyping workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a clear solution concept. Day 2 is hands-on AI prototyping using Lovable.dev — your team builds a working application from the concept, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do participants need programming experience?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The workshop is designed for non-technical teams. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tool do you use to build the prototype?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use Lovable.dev, an AI-powered application builder that turns natural language descriptions into fully functional web applications. It requires no coding knowledge and produces production-ready apps that can be deployed immediately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What kinds of problems has the workshop solved?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. An ops team saved 6 hours per week. The workshop works best with a specific, real internal problem your team faces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many people can join the workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the 2-day and 5-day format?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds user research, multiple iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the workshop be run remotely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The workshop is designed for in-person delivery to maximize collaboration and energy. However, we can run a hybrid or fully remote version for distributed teams. Remote workshops use digital whiteboards and live screen-sharing to maintain the hands-on experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly do teams see results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. The skills transfer is also immediate — participants leave knowing how to repeat the process for future problems without external help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries is this workshop for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, healthcare, public sector, and consulting firms. Any team with a real internal problem to solve is a good fit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Design Thinking fit into an AI workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: Person (Team Members) -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "David Kohlbauer",
+      "jobTitle": "Design Thinking Expert",
+      "description": "Leads Design Thinking workshops at BMW and SAP. Guides teams from a fuzzy problem to a clear wireframe.",
+      "worksFor": { "@type": "Organization", "name": "Signal & Spark" },
+      "sameAs": ["https://www.linkedin.com/in/david-kohlbauer"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dimitri Dumonet",
+      "jobTitle": "Serial Entrepreneur & AI Operator",
+      "description": "10 years of starting companies from scratch. Full-time AI Developer and CTO enabling multiple projects.",
+      "worksFor": { "@type": "Organization", "name": "Signal & Spark" },
+      "sameAs": ["https://www.linkedin.com/in/dimitri-dumonet"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Raphael Herkommer",
+      "jobTitle": "Entrepreneur & Psychologist",
+      "description": "Entrepreneur and psychologist who has facilitated countless workshops — from team dynamics to psychological safety.",
+      "worksFor": { "@type": "Organization", "name": "Signal & Spark" },
+      "sameAs": ["https://www.linkedin.com/in/raphael-herkommer"]
+    }
+  ]
+  </script>
+
+  <!-- Schema.org: AggregateRating -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AI Prototyping Workshop by Signal & Spark",
+    "description": "Hands-on AI and Design Thinking workshop for corporate teams.",
+    "brand": { "@type": "Brand", "name": "Signal & Spark" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "ratingCount": "4",
+      "reviewCount": "4"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Florian Bogenschutz" },
+        "reviewBody": "No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation — and then used them. That's how you upskill a team and improve processes at the same time.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Franziska Kraft" },
+        "reviewBody": "I'm not a developer — I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Nicolas Gutierrez" },
+        "reviewBody": "By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building — I've shipped two more tools since.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Sarah Hoffmann" },
+        "reviewBody": "We thought AI prototyping was only for tech teams. Turns out, with the right method, our HR department built a tool that cut onboarding time in half. Genuinely mind-blowing.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      }
+    ]
+  }
+  </script>
+
 </head>
 <body>
 
@@ -386,12 +688,13 @@
       </div>
       <span class="logo-text">Workshoppers</span>
     </div>
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="#how-it-works">How It Works</a>
       <a href="#learn">What You Learn</a>
       <a href="#team">Team</a>
       <a href="#pricing">Pricing</a>
       <a href="#testimonials">Results</a>
+      <a href="#faq">FAQ</a>
     </nav>
     <div>
       <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn">Book a Discovery Call</a>
@@ -410,13 +713,10 @@
       <div class="badge-dot"></div>
       <span class="badge-text">First of its kind Workshop</span>
     </div>
-    <h1 class="hero-title" id="v1-title">Use AI and<br><em>Design Thinking</em></h1>
+    <h1 class="hero-title" id="v1-title">Use AI and<br><em>Design Thinking</em><br>to Build Your Own Solutions</h1>
     <p class="hero-sub" id="v1-desc">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
     <div class="hero-cta-wrap" id="v1-cta">
-      <div class="hero-cta-pill">
-        <input type="email" placeholder="Enter your work email">
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block">Book a Discovery Call</a>
-      </div>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block">Book a Discovery Call</a>
       <div class="trust-row">
         <span class="trust-count">1,020+ Reviews</span>
         <div class="trust-logos">
@@ -678,6 +978,68 @@
     </div>
   </div>
 </section>
+
+<!-- FAQ -->
+<section class="section-wrap faq-wrap" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-sub">Everything you need to know about the AI Prototyping Workshop.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>What exactly happens in the 2-day workshop?</summary>
+        <div class="faq-answer">Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a clear solution concept. Day 2 is hands-on AI prototyping using Lovable.dev — your team builds a working application from the concept, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do participants need programming experience?</summary>
+        <div class="faq-answer">No. The workshop is designed for non-technical teams. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What tool do you use to build the prototype?</summary>
+        <div class="faq-answer">We use Lovable.dev, an AI-powered application builder that turns natural language descriptions into fully functional web applications. It requires no coding knowledge and produces production-ready apps that can be deployed immediately.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What kinds of problems has the workshop solved?</summary>
+        <div class="faq-answer">Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. An ops team saved 6 hours per week. The workshop works best with a specific, real internal problem your team faces.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How many people can join?</summary>
+        <div class="faq-answer">The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What's the difference between the 2-day and 5-day format?</summary>
+        <div class="faq-answer">The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds user research, multiple iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can the workshop be run remotely?</summary>
+        <div class="faq-answer">The workshop is designed for in-person delivery to maximize collaboration and energy. However, we can run a hybrid or fully remote version for distributed teams. Remote workshops use digital whiteboards and live screen-sharing to maintain the hands-on experience.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How quickly do teams see results?</summary>
+        <div class="faq-answer">By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. The skills transfer is also immediate — participants leave knowing how to repeat the process for future problems without external help.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What industries is this workshop for?</summary>
+        <div class="faq-answer">The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, healthcare, public sector, and consulting firms. Any team with a real internal problem to solve is a good fit.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How does Design Thinking fit into an AI workshop?</summary>
+        <div class="faq-answer">Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">Signal &amp; Spark</span>
+    <p class="footer-text">AI Prototyping Workshops · Design Thinking + AI · Munich, Germany</p>
+    <p class="footer-text">&copy; 2026 Signal &amp; Spark. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Book a Discovery Call</a></p>
+  </div>
+</footer>
 
 <script>
   document.querySelector('.hero-video').playbackRate = 0.5;

@@ -1,0 +1,22 @@
+# robots.txt — Signal & Spark AI Prototyping Workshop
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: *
+Allow: /
+
+# Sitemap (update with your actual domain)
+# Sitemap: https://www.yoursite.com/sitemap.xml
