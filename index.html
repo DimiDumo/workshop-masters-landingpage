@@ -3,223 +3,1250 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI & Design Workshop — Animation Lab</title>
+  <title>AI Prototyping Workshop | Build a Working App in 2 Days · Workshoppers</title>
+  <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Book a discovery call.">
+  <link rel="canonical" href="https://www.yoursite.com/v1/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
+  <meta property="og:description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop for corporate teams.">
+  <meta property="og:url" content="https://www.yoursite.com/v1/">
+  <meta property="og:site_name" content="Workshoppers">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
+  <meta name="twitter:description" content="AI meets Design Thinking — your team builds a real, functional solution in just a few days. Book a discovery call.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #0A0B14;
-      color: #fff;
-      min-height: 100vh;
+      color: #0F172A;
+      background: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ──────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #F1F5F9;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 48px 24px;
+      justify-content: space-between;
+      padding: 20px 64px;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: #4F46E5;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-mark svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .logo-text { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: #0F172A; }
+    nav { display: flex; align-items: center; gap: 36px; }
+    nav a { font-size: 14px; font-weight: 500; color: #475569; text-decoration: none; transition: color 0.15s; }
+    nav a:hover { color: #0F172A; }
+    .cta-btn {
+      background: #4F46E5; color: #fff;
+      font-size: 14px; font-weight: 600;
+      padding: 10px 24px; border-radius: 8px;
+      text-decoration: none; display: inline-block;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #4338CA; transform: translateY(-1px); }
+
+    /* ── HERO V1 ─────────────────────────────────────── */
+    @keyframes v1FadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-section {
       position: relative;
       overflow: hidden;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      align-items: center;
     }
-
-    /* subtle grid background */
-    body::before {
-      content: '';
-      position: fixed;
+    .hero-video {
+      position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(79,70,229,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(79,70,229,0.06) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-    }
-
-    /* glow blobs */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-      opacity: 0.35;
-    }
-    .blob-1 { width: 500px; height: 500px; background: #4F46E5; top: -150px; left: -150px; }
-    .blob-2 { width: 400px; height: 400px; background: #6366F1; bottom: -100px; right: -100px; }
-
-    .hub {
-      position: relative;
-      z-index: 1;
-      max-width: 760px;
       width: 100%;
-      text-align: center;
+      height: 100%;
+      object-fit: cover;
+      transform: scaleY(-1);
+      z-index: 0;
     }
-
-    .hub-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(99,102,241,0.15);
-      border: 1px solid rgba(99,102,241,0.3);
-      border-radius: 100px; padding: 6px 16px;
-      font-size: 12px; font-weight: 600; color: #818CF8;
-      letter-spacing: 0.5px; text-transform: uppercase;
-      margin-bottom: 28px;
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.88) 35%, white 60%);
+      z-index: 1;
     }
-    .hub-badge-dot { width: 6px; height: 6px; background: #818CF8; border-radius: 50%; }
-
-    .hub-title {
-      font-family: 'Sora', sans-serif;
-      font-size: 52px; font-weight: 800;
-      letter-spacing: -2px; line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .hub-title span { color: #818CF8; }
-
-    .hub-sub {
-      font-size: 17px; line-height: 1.6;
-      color: rgba(255,255,255,0.5);
-      max-width: 520px; margin: 0 auto 56px;
-    }
-
-    .versions-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .version-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 36px 28px;
+    .hero {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 100px 64px 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 20px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-      cursor: pointer;
     }
-    .version-card:hover {
-      background: rgba(79,70,229,0.12);
-      border-color: rgba(79,70,229,0.4);
-      transform: translateY(-4px);
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(79,70,229,0.063);
+      border: 1px solid rgba(79,70,229,0.19);
+      border-radius: 100px; padding: 8px 20px;
+      animation: v1FadeUp 0.6s ease-out 0s both;
     }
-
-    .v-number {
-      font-family: 'Sora', sans-serif;
-      font-size: 48px; font-weight: 800;
-      letter-spacing: -2px;
-      background: linear-gradient(135deg, #818CF8, #4F46E5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
+    .badge-dot { width: 8px; height: 8px; background: #4F46E5; border-radius: 50%; }
+    .badge-text { font-size: 13px; font-weight: 500; color: #6366F1; }
+    .hero-title {
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      color: #0F172A;
+      text-align: center;
+      animation: v1FadeUp 0.6s ease-out 0.12s both;
     }
-
-    .v-label {
-      font-family: 'Sora', sans-serif;
-      font-size: 18px; font-weight: 700;
+    .hero-title em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(46px, 6.5vw, 86px);
+      line-height: 1.0;
+      display: block;
+    }
+    .hero-sub {
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(55, 58, 70, 0.8);
+      max-width: 520px;
+      text-align: center;
+      animation: v1FadeUp 0.6s ease-out 0.24s both;
+    }
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: v1FadeUp 0.6s ease-out 0.36s both;
+    }
+    .hero-cta-pill {
+      display: flex;
+      align-items: center;
+      background: #fcfcfc;
+      border: 1px solid #e5e7eb;
+      border-radius: 40px;
+      box-shadow: 0px 10px 40px 5px rgba(194,194,194,0.25);
+      padding: 6px;
+    }
+    .hero-cta-pill input {
+      border: none;
+      background: transparent;
+      padding: 11px 20px;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 15px;
+      color: #374151;
+      outline: none;
+      min-width: 240px;
+    }
+    .hero-cta-pill input::placeholder { color: #9ca3af; }
+    .hero-cta-btn {
+      background: #0f172a;
       color: #fff;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 34px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: inset -4px -6px 25px 0px rgba(201,201,201,0.08), inset 4px 4px 10px 0px rgba(29,29,29,0.24);
+      transition: opacity 0.15s, transform 0.15s;
     }
-    .v-desc {
-      font-size: 13px; line-height: 1.6;
-      color: rgba(255,255,255,0.4);
+    .hero-cta-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .trust-row { display: flex; align-items: center; gap: 16px; }
+    .trust-count { font-size: 12px; color: #6b7280; font-weight: 500; }
+    .trust-logos { display: flex; align-items: center; gap: 16px; }
+    .trust-logos span { font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #94A3B8; }
+
+    /* ── SECTION BASE ────────────────────────────────── */
+    .section-wrap { width: 100%; }
+    .section-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px 64px;
+      display: flex; flex-direction: column; gap: 48px;
+    }
+    .section-header { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #4F46E5; text-transform: uppercase; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: 44px; font-weight: 700; letter-spacing: -1.5px; color: #0F172A; text-align: center; line-height: 1.1; }
+    .section-sub { font-size: 18px; line-height: 1.6; color: #64748B; text-align: center; max-width: 700px; }
+
+    /* ── PROBLEM ─────────────────────────────────────── */
+    .problem-wrap { background: #fff; }
+    .problem-wrap .section-title { max-width: 800px; }
+    .problem-wrap .section-sub { max-width: 700px; }
+    .gradient-card {
+      background: linear-gradient(160deg, #6366F1 0%, #4338CA 100%);
+      border-radius: 20px;
+      padding: 56px 40px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
       text-align: center;
     }
-    .v-status {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 600;
-      padding: 4px 12px; border-radius: 100px;
-      background: rgba(99,102,241,0.15);
-      color: #818CF8;
-      border: 1px solid rgba(99,102,241,0.25);
-    }
-    .v-status-dot { width: 5px; height: 5px; background: #818CF8; border-radius: 50%; }
+    .card-sub { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 500; color: rgba(255,255,255,0.67); line-height: 1.4; }
+    .card-main { font-family: 'Sora', sans-serif; font-size: 48px; font-weight: 800; letter-spacing: -2px; color: #fff; }
+    .card-accent { width: 80px; height: 4px; background: rgba(255,255,255,0.31); border-radius: 2px; }
 
-    .v-arrow {
-      width: 36px; height: 36px;
-      background: rgba(79,70,229,0.2);
-      border: 1px solid rgba(79,70,229,0.3);
-      border-radius: 50%;
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step-card {
+      background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 32px; display: flex; flex-direction: column; gap: 20px;
+    }
+    .step-num {
+      width: 56px; height: 56px; background: #4F46E5; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
     }
-    .version-card:hover .v-arrow { background: #4F46E5; border-color: #4F46E5; }
-    .v-arrow svg { width: 16px; height: 16px; stroke: #818CF8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .version-card:hover .v-arrow svg { stroke: #fff; }
+    .step-title { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: #0F172A; }
+    .step-desc { font-size: 14px; line-height: 1.7; color: #64748B; }
+    .step-tag {
+      display: inline-block;
+      background: rgba(79,70,229,0.063); border: 1px solid rgba(79,70,229,0.19);
+      border-radius: 6px; padding: 6px 12px;
+      font-size: 11px; font-weight: 600; color: #6366F1;
+    }
 
-    .hub-footer {
-      margin-top: 48px;
+    /* ── WHAT YOU LEARN ──────────────────────────────── */
+    .learn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .learn-card {
+      background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 32px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .learn-card.accent { border-color: rgba(79,70,229,0.13); }
+    .learn-card svg { width: 24px; height: 24px; stroke: #4F46E5; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .learn-title { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: #0F172A; }
+    .learn-desc { font-size: 14px; line-height: 1.6; color: #64748B; }
+
+    /* ── TESTIMONIALS ────────────────────────────────── */
+    .testimonials-wrap { background: #F1F5F9; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonial-card {
+      background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 32px; display: flex; flex-direction: column; gap: 20px;
+    }
+    .testimonial-quote { font-size: 15px; line-height: 1.7; color: #334155; flex: 1; }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .author-info { display: flex; flex-direction: column; gap: 2px; }
+    .author-name { font-size: 14px; font-weight: 600; color: #0F172A; }
+    .author-role { font-size: 12px; color: #64748B; }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #CBD5E1; }
+    .dot.active { background: #4F46E5; }
+    .logos-row { display: flex; justify-content: center; align-items: center; gap: 64px; }
+    .logos-row span { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; color: #64748B; }
+
+    /* ── TEAM ────────────────────────────────────────── */
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .team-card {
+      background: #fff; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center;
+    }
+    .team-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Sora', sans-serif; font-size: 24px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .team-name-wrap { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .team-name { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: #0F172A; }
+    .team-role { font-size: 14px; font-weight: 600; color: #4F46E5; }
+    .team-desc { font-size: 15px; line-height: 1.7; color: #334155; }
+
+    /* ── PRICING ─────────────────────────────────────── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+    .pricing-card {
+      background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px;
+      padding: 36px; display: flex; flex-direction: column; gap: 28px;
+    }
+    .pricing-card.featured { background: #fff; border: 2px solid #4F46E5; }
+    .pricing-badge {
+      display: inline-block; background: #4F46E5; color: #fff;
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      padding: 4px 12px; border-radius: 100px; align-self: flex-start;
+    }
+    .pricing-header { display: flex; flex-direction: column; gap: 12px; }
+    .pricing-name { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: #0F172A; }
+    .pricing-desc { font-size: 14px; line-height: 1.6; color: #64748B; }
+    .pricing-price { font-family: 'Sora', sans-serif; font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: #0F172A; }
+    .pricing-divider { height: 1px; background: #E2E8F0; }
+    .pricing-features { display: flex; flex-direction: column; gap: 14px; flex: 1; }
+    .pricing-feature { display: flex; align-items: center; gap: 10px; }
+    .pricing-feature svg { width: 16px; height: 16px; stroke: #4F46E5; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .pricing-feature span { font-size: 14px; color: #64748B; }
+    .pricing-cta {
+      display: flex; align-items: center; justify-content: center;
+      background: #4F46E5; color: #fff;
+      font-size: 15px; font-weight: 600;
+      padding: 14px 24px; border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .pricing-cta:hover { background: #4338CA; transform: translateY(-1px); }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-wrap { background: #fff; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto; width: 100%; }
+    .faq-item { border-bottom: 1px solid #E2E8F0; }
+    .faq-item:first-child { border-top: 1px solid #E2E8F0; }
+    .faq-item summary {
+      font-family: 'Sora', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #0F172A;
+      padding: 24px 0;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 22px;
+      font-weight: 400;
+      color: #94A3B8;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+    .faq-answer {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #64748B;
+      padding: 0 0 24px;
+      max-width: 720px;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    .site-footer {
+      background: #0F172A;
+      padding: 40px 64px;
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-brand {
+      font-family: 'Sora', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .footer-text {
       font-size: 13px;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
     }
-    .hub-footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
-    .hub-footer a:hover { color: rgba(255,255,255,0.6); }
+    .footer-text a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    .footer-text a:hover { color: #fff; }
 
-    @media (max-width: 640px) {
-      .hub-title { font-size: 36px; }
-      .versions-grid { grid-template-columns: 1fr; }
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .header-inner { padding: 16px 24px; }
+      nav { display: none; }
+      .hero { padding: 0 24px 60px; }
+      .hero-title { font-size: 48px; }
+      .hero-title em { font-size: 60px; }
+      .hero-cta-pill { flex-direction: column; border-radius: 20px; }
+      .hero-cta-pill input { min-width: unset; width: 100%; }
+      .section-inner { padding: 60px 24px; }
+      .section-title { font-size: 34px; }
+      .steps-grid, .testimonials-grid, .team-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .learn-grid { grid-template-columns: 1fr; }
     }
+    @media (max-width: 640px) {
+      .hero-title { font-size: 36px; letter-spacing: -0.03em; }
+      .hero-title em { font-size: 46px; }
+      .hero-sub { font-size: 16px; }
+      .trust-row { flex-direction: column; gap: 8px; }
+      .section-title { font-size: 26px; }
+      .card-main { font-size: 36px; }
+      .logos-row { gap: 28px; flex-wrap: wrap; }
+      .site-footer { padding: 32px 24px; }
+    }
+
+    /* ── I18N ───────────────────────────────────────── */
+    html.i18n-loading { visibility: hidden; }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: #F1F5F9;
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .lang-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lang-btn.active {
+      background: #fff;
+      color: #0F172A;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .lang-btn:hover:not(.active) { color: #0F172A; }
   </style>
+
+  <script>
+  (function() {
+    var stored = localStorage.getItem('lang');
+    var lang = stored || (navigator.language && navigator.language.startsWith('de') ? 'de' : 'en');
+    if (!stored) localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+    if (lang !== 'en') document.documentElement.classList.add('i18n-loading');
+  })();
+  </script>
+
+  <!-- Schema.org: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Workshoppers",
+    "description": "AI Prototyping Workshops combining Design Thinking and AI for corporate teams in the DACH region.",
+    "url": "https://www.yoursite.com",
+    "sameAs": [
+      "https://www.linkedin.com/company/signal-and-spark"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "availableLanguage": ["English", "German"]
+    }
+  }
+  </script>
+
+  <!-- Schema.org: Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Prototyping Workshop",
+    "description": "A hands-on 2-day or 5-day workshop where corporate teams use Design Thinking and AI tools to build a real, working internal solution. No coding required.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Workshoppers"
+    },
+    "areaServed": [
+      { "@type": "Country", "name": "Germany" },
+      { "@type": "Country", "name": "Austria" },
+      { "@type": "Country", "name": "Switzerland" }
+    ],
+    "serviceType": "AI Workshop / Corporate Training",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Prototype Sprint",
+        "description": "2 days of intensive, hands-on AI prototyping workshop for up to 10 people.",
+        "price": "6500",
+        "priceCurrency": "EUR"
+      },
+      {
+        "@type": "Offer",
+        "name": "Deep Dive Sprint",
+        "description": "5 days of comprehensive facilitation with research, testing, and deployment for up to 10 people.",
+        "price": "18000",
+        "priceCurrency": "EUR"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What exactly happens in the 2-day AI prototyping workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a wireframe of how the app will look and work. Day 2 is hands-on AI prototyping using Lovable.dev. Your team takes the wireframe and builds a working application from it, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do participants need programming experience?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Your team does not need any technical knowledge. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tool do you use to build the prototype?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We use tools like Lovable.dev, an AI-powered application builder that turns natural language into fully functional web applications. It requires no technical knowledge and handles all the heavy lifting for you: deployment, authentication, databases, and hosting. Your team focuses on the idea, Lovable takes care of the rest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What kinds of problems has the workshop solved?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. A founder automated hours of weekly research into a single tool. The workshop works best with a specific, real internal problem your team faces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many people can join the workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the 2-day and 5-day format?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds more fundamental knowledge, more iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the workshop be run remotely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The workshop is designed for in-person delivery to maximize collaboration and impact."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly do teams see results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. Since everything is built using natural language, the skills transfer is immediate. We also hand out all workshop materials, so participants leave knowing how to repeat the process by themselves."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries is this workshop for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, consulting firms, and innovation teams."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Design Thinking fit into an AI workshop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org: Person (Team Members) -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "David Kohlbauer",
+      "jobTitle": "Design Thinking Expert",
+      "description": "Leads Design Thinking workshops at BMW and SAP. Guides teams from a fuzzy problem to a clear wireframe.",
+      "worksFor": { "@type": "Organization", "name": "Workshoppers" },
+      "sameAs": ["https://www.linkedin.com/in/david-kohlbauer"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dimitri Dumonet",
+      "jobTitle": "Serial Entrepreneur & AI Operator",
+      "description": "10 years of starting companies from scratch. Full-time AI Developer and CTO enabling multiple projects.",
+      "worksFor": { "@type": "Organization", "name": "Workshoppers" },
+      "sameAs": ["https://www.linkedin.com/in/dimitri-dumonet"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Raphael Herkommer",
+      "jobTitle": "Entrepreneur & Psychologist",
+      "description": "Entrepreneur and psychologist who has facilitated countless workshops, from team dynamics to psychological safety.",
+      "worksFor": { "@type": "Organization", "name": "Workshoppers" },
+      "sameAs": ["https://www.linkedin.com/in/raphael-herkommer"]
+    }
+  ]
+  </script>
+
+  <!-- Schema.org: AggregateRating -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "AI Prototyping Workshop by Workshoppers",
+    "description": "Hands-on AI and Design Thinking workshop for corporate teams.",
+    "brand": { "@type": "Brand", "name": "Workshoppers" },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "ratingCount": "3",
+      "reviewCount": "3"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Florian Bogenschutz" },
+        "reviewBody": "No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation, and then used them. That's how you upskill a team and improve processes at the same time.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Franziska Kraft" },
+        "reviewBody": "I'm not a developer, I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      },
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Nicolas Gutierrez" },
+        "reviewBody": "By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building. I've shipped two more tools since.",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+      }
+    ]
+  }
+  </script>
+
 </head>
 <body>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
 
-  <div class="hub">
-    <div class="hub-badge">
-      <div class="hub-badge-dot"></div>
-      Animation Lab
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <span class="logo-text">Workshoppers</span>
     </div>
-
-    <h1 class="hub-title">Pick a <span>Version</span></h1>
-    <p class="hub-sub">Three identical websites — same base design, different background animations. Switch between them to compare.</p>
-
-    <div class="versions-grid">
-      <a href="v1/index.html" class="version-card">
-        <div class="v-number">V1</div>
-        <div class="v-label">Version 1</div>
-        <p class="v-desc">Base design.<br>Add animation here.</p>
-        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
-        <div class="v-arrow">
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-      <a href="v2/index.html" class="version-card">
-        <div class="v-number">V2</div>
-        <div class="v-label">Version 2</div>
-        <p class="v-desc">Base design.<br>Add animation here.</p>
-        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
-        <div class="v-arrow">
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-      <a href="v3/index.html" class="version-card">
-        <div class="v-number">V3</div>
-        <div class="v-label">Version 3</div>
-        <p class="v-desc">Base design.<br>Add animation here.</p>
-        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
-        <div class="v-arrow">
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-      <a href="v4/index.html" class="version-card">
-        <div class="v-number">V4</div>
-        <div class="v-label">Version 4</div>
-        <p class="v-desc">CSS tile grid.<br>Animated color wave.</p>
-        <div class="v-status"><div class="v-status-dot"></div>Ready</div>
-        <div class="v-arrow">
-          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
+    <nav aria-label="Main navigation">
+      <a href="#how-it-works" data-i18n="nav.how">How It Works</a>
+      <a href="#learn" data-i18n="nav.learn">What You Learn</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#testimonials" data-i18n="nav.results">Results</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="lang-toggle" aria-label="Language" role="group">
+      <button data-lang="en" class="lang-btn active">EN</button>
+      <button data-lang="de" class="lang-btn">DE</button>
     </div>
-
-    <p class="hub-footer">
-      Signal &amp; Spark · AI &amp; Design Thinking Workshop
-    </p>
+    <div>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Book a Discovery Call</a>
+    </div>
   </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-section">
+  <video class="hero-video" autoplay loop muted playsinline>
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260302_085640_276ea93b-d7da-4418-a09b-2aa5b490e838.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero">
+    <div class="badge" id="v1-badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text" data-i18n="hero.badge">First of its kind Workshop</span>
+    </div>
+    <h1 class="hero-title" id="v1-title" data-i18n="hero.title">Use AI and<br><em>Design Thinking</em><br>to Build Your Own Solutions</h1>
+    <p class="hero-sub" id="v1-desc" data-i18n="hero.sub">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
+    <div class="hero-cta-wrap" id="v1-cta">
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block" data-i18n="hero.cta">Book a Discovery Call</a>
+      <div class="trust-row">
+        <div class="trust-logos">
+          <span>BMW</span>
+          <span>SAP</span>
+          <span>O2</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section-wrap problem-wrap">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="problem.label">The Problem</span>
+      <h2 class="section-title" data-i18n="problem.title">Most Teams Know Exactly<br>What's Slowing Them Down</h2>
+      <p class="section-sub" data-i18n="problem.sub">The tricky part isn't identifying the problem, it's finding the time, the tools, and the method to actually do something about it. So it stays on the list. Quarter after quarter.</p>
+    </div>
+    <div class="gradient-card">
+      <p class="card-sub" data-i18n="problem.card.sub">What if you could<br>just… fix it?</p>
+      <p class="card-main" data-i18n="problem.card.main">This week.</p>
+      <div class="card-accent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section-wrap" id="how-it-works">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="how.label">How It Works</span>
+      <h2 class="section-title" data-i18n="how.title">We Don't Teach AI in Theory.<br>We Give Your Team a Goal.</h2>
+      <p class="section-sub" data-i18n="how.sub">Because the fastest way to learn a new skill isn't a course. It's a project with a deadline and something worth finishing at the end.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3 class="step-title" data-i18n="how.s1.title">Understand the Problem</h3>
+        <p class="step-desc" data-i18n="how.s1.desc">Your team uses Design Thinking to properly understand the challenge: who it affects, why it matters, and what a real solution looks like.</p>
+        <span class="step-tag" data-i18n="how.s1.tag">Part 1 — Design Thinking</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3 class="step-title" data-i18n="how.s2.title">Build with AI</h3>
+        <p class="step-desc" data-i18n="how.s2.desc">Using AI tools like Lovable.dev, your team builds a working prototype. Not a mockup, but a live application that tackles the problem.</p>
+        <span class="step-tag" data-i18n="how.s2.tag">Part 2 — AI Prototyping</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3 class="step-title" data-i18n="how.s3.title">Own the Skills</h3>
+        <p class="step-desc" data-i18n="how.s3.desc">By the end, your team won't just have a working prototype. They'll know how to do it again. On their own. Without us.</p>
+        <span class="step-tag" data-i18n="how.s3.tag">Results</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU LEARN -->
+<section class="section-wrap" id="learn">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="learn.label">Skills</span>
+      <h2 class="section-title" data-i18n="learn.title">What Your Team Learns by Doing</h2>
+      <p class="section-sub" data-i18n="learn.sub">Practical skills they'll use immediately, and keep using long after the workshop.</p>
+    </div>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <!-- sparkles -->
+        <svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+        <h3 class="learn-title" data-i18n="learn.c1.title">Use AI tools confidently</h3>
+        <p class="learn-desc" data-i18n="learn.c1.desc">And know their limits. Understand what AI can and can't do, so you use it wisely.</p>
+      </div>
+      <div class="learn-card">
+        <!-- puzzle -->
+        <svg viewBox="0 0 24 24"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 1.998 12c0-.617.236-1.234.706-1.704L4.23 8.77c.24-.24.581-.353.917-.303.515.077.877.528 1.073 1.01a2.5 2.5 0 1 0 3.259-3.259c-.482-.196-.933-.558-1.01-1.073-.05-.336.062-.676.303-.917l1.525-1.525A2.402 2.402 0 0 1 12 2c.617 0 1.234.236 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02z"/></svg>
+        <h3 class="learn-title" data-i18n="learn.c2.title">Break messy problems down</h3>
+        <p class="learn-desc" data-i18n="learn.c2.desc">Turn a vague challenge into something buildable using Design Thinking.</p>
+      </div>
+      <div class="learn-card">
+        <!-- message-square -->
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3 class="learn-title" data-i18n="learn.c3.title">Prompt, iterate, and build</h3>
+        <p class="learn-desc" data-i18n="learn.c3.desc">Build working applications using just natural language. No coding experience required.</p>
+      </div>
+      <div class="learn-card accent">
+        <!-- repeat -->
+        <svg viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <h3 class="learn-title" data-i18n="learn.c4.title">Run the process again</h3>
+        <p class="learn-desc" data-i18n="learn.c4.desc">For the next problem, and the one after that. The method is yours to keep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-wrap testimonials-wrap" id="testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="test.label">Testimonials</span>
+      <h2 class="section-title" data-i18n="test.title">What Teams Say After<br>the Workshop</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote" data-i18n="test.q1">"No slides, just hands-on work toward a real goal. We learned which AI tools fit our situation, and then used them. That's how you upskill a team and improve processes at the same time."</p>
+        <div class="t-author">
+          <img class="avatar" src="assets/florian-bogenschuetz.jpg" alt="Florian Bogenschütz" style="object-fit:cover">
+          <div class="author-info">
+            <span class="author-name">Florian Bogenschütz</span>
+            <span class="author-role" data-i18n="test.r1">CEO Wayra Germany / Telefonica</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote" data-i18n="test.q2">"I'm not a developer, I'm a marketer. But by the end of the workshop, I had built a working prototype app with my own hands. It felt unreal, and it completely changed how I think about what's possible with AI."</p>
+        <div class="t-author">
+          <img class="avatar" src="assets/franziska-kraft.jpg" alt="Franziska Kraft" style="object-fit:cover">
+          <div class="author-info">
+            <span class="author-name">Franziska Kraft</span>
+            <span class="author-role" data-i18n="test.r2">Head of Marketing, Wayra Germany / Telefonica</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote" data-i18n="test.q3">"By the end of day two, I had a working app that solved a real problem for my team. The workshop gave me the confidence and the method to keep building. I've shipped two more tools since."</p>
+        <div class="t-author">
+          <img class="avatar" src="assets/nicolas-gutierrez.jpg" alt="Nicolas Gutierrez" style="object-fit:cover">
+          <div class="author-info">
+            <span class="author-name">Nicolas Gutierrez</span>
+            <span class="author-role" data-i18n="test.r3">Founder, Flygaroo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="logos-row">
+      <span>BMW</span>
+      <span>SAP</span>
+      <span>O2</span>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section-wrap" id="team">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="team.label">Your Coaches</span>
+      <h2 class="section-title" data-i18n="team.title">The Team Behind<br>the Workshop</h2>
+      <p class="section-sub" data-i18n="team.sub">A unique mix of AI, design thinking, and psychology.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <img class="team-avatar" src="assets/david-kohlbauer.jpg" alt="David Kohlbauer" style="object-fit:cover">
+        <div class="team-name-wrap">
+          <a class="team-name" href="https://www.linkedin.com/in/david-kohlbauer-a992608a/" target="_blank" style="text-decoration:none;color:inherit">David Kohlbauer</a>
+          <div class="team-role" data-i18n="team.m1.role">Design Thinking Expert</div>
+        </div>
+        <p class="team-desc" data-i18n="team.m1.desc">Leads Design Thinking workshops at BMW and SAP. Guides teams from a fuzzy problem to a clear wireframe. Fast and with everyone involved.</p>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="assets/dimitri-dumonet.jpg" alt="Dimitri Dumonet" style="object-fit:cover">
+        <div class="team-name-wrap">
+          <a class="team-name" href="https://www.linkedin.com/in/dimitri-dumonet/" target="_blank" style="text-decoration:none;color:inherit">Dimitri Dumonet</a>
+          <div class="team-role" data-i18n="team.m2.role">Serial Entrepreneur &amp; AI Operator</div>
+        </div>
+        <p class="team-desc" data-i18n="team.m2.desc">10 years of starting companies from scratch. Now a full-time AI Developer and CTO enabling multiple projects.</p>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="assets/raphael-herkommer.jpg" alt="Raphael Herkommer" style="object-fit:cover">
+        <div class="team-name-wrap">
+          <a class="team-name" href="https://www.linkedin.com/in/raphael-herkommer/" target="_blank" style="text-decoration:none;color:inherit">Raphael Herkommer</a>
+          <div class="team-role" data-i18n="team.m3.role">Entrepreneur &amp; Psychologist</div>
+        </div>
+        <p class="team-desc" data-i18n="team.m3.desc">Entrepreneur and psychologist who has facilitated countless workshops, from team dynamics to psychological safety. Makes sure people actually open up, think boldly, and walk away changed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-wrap" id="pricing">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="price.label">Pricing</span>
+      <h2 class="section-title" data-i18n="price.title">Choose Your Sprint Format</h2>
+      <p class="section-sub" data-i18n="price.sub">Both formats deliver a working prototype and a team that knows how to build again.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3 class="pricing-name" data-i18n="price.p1.name">Prototype Sprint</h3>
+          <p class="pricing-desc" data-i18n="price.p1.desc">2 days of intensive, hands-on workshop for up to 10 people.</p>
+        </div>
+        <div class="pricing-price" data-i18n="price.p1.price">from €6,500</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f1">Full 2-day facilitation by our team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f2">Design thinking methodology</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f3">AI prototyping with Lovable.dev</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f4">All workshop materials and exercises</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f5">Platform access for all participants</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f6">Live deployment of working application</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f7">2 weeks post-workshop support</span></div>
+        </div>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p1.cta">Book a Discovery Call</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3 class="pricing-name" data-i18n="price.p2.name">Deep Dive Sprint</h3>
+          <p class="pricing-desc" data-i18n="price.p2.desc">5 days of comprehensive facilitation with research, testing, and deployment for up to 10 people.</p>
+        </div>
+        <div class="pricing-price" data-i18n="price.p2.price">from €18,000</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f1">Full 5-day facilitation by our team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f2">Design thinking methodology</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f3">AI prototyping with Lovable.dev</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f4">All workshop materials and exercises</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f5">Platform access for all participants</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f6">Live deployment of working application</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f7">4 weeks post-workshop support</span></div>
+        </div>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p2.cta">Book a Discovery Call</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge" data-i18n="price.p3.badge">MOST FLEXIBLE</div>
+        <div class="pricing-header">
+          <h3 class="pricing-name" data-i18n="price.p3.name">Custom Workshop</h3>
+          <p class="pricing-desc" data-i18n="price.p3.desc">More than 10 people, or want a different setup? We talk beforehand to understand your challenge, then design a workshop tailored to your team.</p>
+        </div>
+        <div class="pricing-price" data-i18n="price.p3.price">Let's talk</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f1">Pre-workshop discovery call to define scope</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f2">Flexible duration, from 1 to 5 days</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f3">Tailored exercises for your industry and team</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f4">Focus on your specific problem and goals</span></div>
+          <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f5">Custom post-workshop support package</span></div>
+        </div>
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p3.cta">Book a Discovery Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-wrap faq-wrap" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <span class="section-label" data-i18n="faq.label">FAQ</span>
+      <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+      <p class="section-sub" data-i18n="faq.sub">Everything you need to know about the AI Prototyping Workshop.</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-i18n="faq.q1">What exactly happens in the 2-day workshop?</summary>
+        <div class="faq-answer" data-i18n="faq.a1">Day 1 focuses on Design Thinking: your team defines the problem, maps user needs, and creates a wireframe of how the app will look and work. Day 2 is hands-on AI prototyping using Lovable.dev. Your team takes the wireframe and builds a working application from it, tests it, and deploys it live. You walk away with a functional product and the skills to repeat the process.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q2">Do participants need programming experience?</summary>
+        <div class="faq-answer" data-i18n="faq.a2">No. Your team does not need any technical knowledge. You build using natural language prompts and AI-powered no-code tools. Marketers, HR professionals, operations managers, and product owners have all successfully completed the workshop and built working apps.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q3">What tool do you use to build the prototype?</summary>
+        <div class="faq-answer" data-i18n="faq.a3">We use tools like Lovable.dev, an AI-powered application builder that turns natural language into fully functional web applications. It requires no technical knowledge and handles all the heavy lifting for you: deployment, authentication, databases, and hosting. Your team focuses on the idea, Lovable takes care of the rest.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q4">What kinds of problems has the workshop solved?</summary>
+        <div class="faq-answer" data-i18n="faq.a4">Teams have built internal tools for HR onboarding, operations dashboards, customer service workflows, inventory tracking, and project management. One HR team cut onboarding time in half. A founder automated hours of weekly research into a single tool. The workshop works best with a specific, real internal problem your team faces.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q5">How many people can join?</summary>
+        <div class="faq-answer" data-i18n="faq.a5">The standard format supports up to 10 participants. This keeps the workshop hands-on and ensures each person gets coaching. For groups larger than 10, we offer custom workshops with adjusted facilitation and additional coaches.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q6">What's the difference between the 2-day and 5-day format?</summary>
+        <div class="faq-answer" data-i18n="faq.a6">The 2-day Prototype Sprint delivers a working MVP. The 5-day Deep Dive adds more fundamental knowledge, more iteration cycles, thorough testing, and a more polished final product. The 5-day format is ideal for complex problems or when you want deeper skill transfer across the team.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q7">Can the workshop be run remotely?</summary>
+        <div class="faq-answer" data-i18n="faq.a7">No. The workshop is designed for in-person delivery to maximize collaboration and impact.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q8">How quickly do teams see results?</summary>
+        <div class="faq-answer" data-i18n="faq.a8">By the end of day 2, your team has a working prototype deployed and ready to use. Many teams start using the tool immediately. Since everything is built using natural language, the skills transfer is immediate. We also hand out all workshop materials, so participants leave knowing how to repeat the process by themselves.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q9">What industries is this workshop for?</summary>
+        <div class="faq-answer" data-i18n="faq.a9">The workshop works across industries. We have experience with automotive (BMW ecosystem), enterprise SaaS, fintech, HR-heavy organisations, Mittelstand manufacturing, logistics, consulting firms, and innovation teams.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-i18n="faq.q10">How does Design Thinking fit into an AI workshop?</summary>
+        <div class="faq-answer" data-i18n="faq.a10">Design Thinking ensures you build the right thing before you build it fast. Without it, teams jump to solutions that miss the real problem. The combination is what makes the workshop unique: Design Thinking defines what to build, AI tools build it in hours instead of months.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-brand">Workshoppers</span>
+    <p class="footer-text" data-i18n="footer.tagline">AI Prototyping Workshops · Design Thinking + AI · Munich, Germany</p>
+    <p class="footer-text" data-i18n="footer.copy">&copy; 2026 Workshoppers. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Book a Discovery Call</a></p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  document.querySelector('.hero-video').playbackRate = 0.5;
+
+  var T = {
+    // ── Meta ──
+    '_meta_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen · Workshoppers',
+    '_meta_desc': 'Euer Team löst ein echtes Problem mit AI + Design Thinking — und geht mit einem fertigen Produkt nach Hause. 2- oder 5-Tage-Workshop. DACH-Region.',
+    '_og_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
+    '_og_desc': 'Euer Team löst ein echtes Problem mit AI + Design Thinking — und geht mit einem fertigen Produkt nach Hause. Workshop für Unternehmensteams.',
+    '_tw_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
+    '_tw_desc': 'AI trifft Design Thinking — euer Team baut in wenigen Tagen eine echte, funktionierende Lösung. Erstgespräch buchen.',
+
+    // ── Nav ──
+    'nav.how': 'So funktioniert\u2019s',
+    'nav.learn': 'Was ihr lernt',
+    'nav.team': 'Team',
+    'nav.pricing': 'Preise',
+    'nav.results': 'Ergebnisse',
+    'nav.faq': 'FAQ',
+    'cta.book': 'Erstgespr\u00e4ch buchen',
+
+    // ── Hero ──
+    'hero.badge': 'Einzigartiger Workshop',
+    'hero.title': 'Nutzt AI und<br><em>Design Thinking</em><br>um eure eigenen L\u00f6sungen zu bauen',
+    'hero.sub': 'AI trifft Design Thinking \u2014 euer Team baut in wenigen Tagen eine echte, funktionierende L\u00f6sung. Innovieren. Bauen. Dazulernen.',
+    'hero.cta': 'Erstgespr\u00e4ch buchen',
+
+    // ── Problem ──
+    'problem.label': 'Das Problem',
+    'problem.title': 'Die meisten Teams wissen genau,<br>was sie ausbremst',
+    'problem.sub': 'Das Problem ist nicht, das Problem zu erkennen \u2014 sondern die Zeit, die Tools und die Methode zu finden, um wirklich etwas dagegen zu tun. Und so bleibt es auf der Liste. Quartal f\u00fcr Quartal.',
+    'problem.card.sub': 'Was w\u00e4re, wenn ihr es<br>einfach\u2026 l\u00f6sen k\u00f6nntet?',
+    'problem.card.main': 'Diese Woche.',
+
+    // ── How It Works ──
+    'how.label': 'So funktioniert\u2019s',
+    'how.title': 'Wir unterrichten AI nicht in der Theorie.<br>Wir geben eurem Team ein Ziel.',
+    'how.sub': 'Weil man neue Skills nicht in Kursen lernt. Sondern mit einem Projekt, einer Deadline und einem Ergebnis, das sich lohnt.',
+    'how.s1.title': 'Das Problem verstehen',
+    'how.s1.desc': 'Euer Team nutzt Design Thinking, um die Herausforderung wirklich zu verstehen: Wen betrifft sie? Warum ist sie wichtig? Und wie sieht eine echte L\u00f6sung aus?',
+    'how.s1.tag': 'Teil 1 \u2014 Design Thinking',
+    'how.s2.title': 'Bauen mit AI',
+    'how.s2.desc': 'Mit AI-Tools wie Lovable.dev baut euer Team einen funktionierenden Prototyp. Kein Mockup \u2014 eine echte Anwendung, die das Problem l\u00f6st.',
+    'how.s2.tag': 'Teil 2 \u2014 AI Prototyping',
+    'how.s3.title': 'Die Skills behalten',
+    'how.s3.desc': 'Am Ende hat euer Team nicht nur einen funktionierenden Prototyp. Sondern auch das Wissen, es wieder zu tun. Alleine. Ohne uns.',
+    'how.s3.tag': 'Ergebnis',
+
+    // ── Skills ──
+    'learn.label': 'Skills',
+    'learn.title': 'Was euer Team durch Machen lernt',
+    'learn.sub': 'Praktische Skills, die euer Team sofort einsetzt \u2014 und auch lange nach dem Workshop noch nutzt.',
+    'learn.c1.title': 'AI-Tools souver\u00e4n einsetzen',
+    'learn.c1.desc': 'Und ihre Grenzen kennen. Verstehen, was AI kann und was nicht \u2014 und sie gezielt einsetzen.',
+    'learn.c2.title': 'Komplexe Probleme zerlegen',
+    'learn.c2.desc': 'Mit Design Thinking eine vage Herausforderung in etwas Baubares verwandeln.',
+    'learn.c3.title': 'Prompten, iterieren, bauen',
+    'learn.c3.desc': 'Funktionierende Anwendungen nur mit nat\u00fcrlicher Sprache bauen. Keine Programmierkenntnisse n\u00f6tig.',
+    'learn.c4.title': 'Den Prozess wiederholen',
+    'learn.c4.desc': 'F\u00fcr das n\u00e4chste Problem. Und das danach. Die Methode geh\u00f6rt euch.',
+
+    // ── Testimonials ──
+    'test.label': 'Stimmen',
+    'test.title': 'Was Teams nach<br>dem Workshop sagen',
+    'test.q1': '\u201eKeine Folien, nur praktische Arbeit an einem echten Ziel. Wir haben gelernt, welche AI-Tools zu unserer Situation passen \u2014 und sie dann direkt eingesetzt. So bildet man ein Team weiter und verbessert gleichzeitig Prozesse.\u201c',
+    'test.r1': 'CEO Wayra Germany / Telefonica',
+    'test.q2': '\u201eIch bin keine Entwicklerin, ich bin Marketerin. Aber am Ende des Workshops hatte ich mit eigenen H\u00e4nden einen funktionierenden Prototyp gebaut. Das war surreal \u2014 und hat komplett ver\u00e4ndert, wie ich \u00fcber die M\u00f6glichkeiten von AI denke.\u201c',
+    'test.r2': 'Head of Marketing, Wayra Germany / Telefonica',
+    'test.q3': '\u201eAm Ende von Tag zwei hatte ich eine funktionierende App, die ein echtes Problem meines Teams l\u00f6st. Der Workshop hat mir das Selbstvertrauen und die Methode gegeben, weiterzubauen. Seitdem habe ich zwei weitere Tools gebaut.\u201c',
+    'test.r3': 'Gr\u00fcnder, Flygaroo',
+
+    // ── Team ──
+    'team.label': 'Eure Coaches',
+    'team.title': 'Das Team hinter<br>dem Workshop',
+    'team.sub': 'Eine einzigartige Mischung aus AI, Design Thinking und Psychologie.',
+    'team.m1.role': 'Design Thinking Experte',
+    'team.m1.desc': 'Leitet Design-Thinking-Workshops bei BMW und SAP. Bringt Teams von einem vagen Problem zu einem klaren Wireframe \u2014 schnell und mit allen Beteiligten.',
+    'team.m2.role': 'Serial Entrepreneur & AI Operator',
+    'team.m2.desc': '10 Jahre Erfahrung im Aufbau von Unternehmen. Heute Full-Time AI Developer und CTO f\u00fcr mehrere Projekte.',
+    'team.m3.role': 'Unternehmer & Psychologe',
+    'team.m3.desc': 'Unternehmer und Psychologe mit unz\u00e4hligen Workshop-Erfahrungen \u2014 von Teamdynamik bis psychologische Sicherheit. Sorgt daf\u00fcr, dass Menschen sich wirklich \u00f6ffnen, mutig denken und ver\u00e4ndert hinausgehen.',
+
+    // ── Pricing ──
+    'price.label': 'Preise',
+    'price.title': 'W\u00e4hlt euer Sprint-Format',
+    'price.sub': 'Beide Formate liefern einen funktionierenden Prototyp \u2014 und ein Team, das wei\u00df, wie es wieder geht.',
+    'price.p1.name': 'Prototype Sprint',
+    'price.p1.desc': '2 Tage intensiver, praktischer Workshop f\u00fcr bis zu 10 Personen.',
+    'price.p1.price': 'ab 6.500\u00a0\u20ac',
+    'price.p1.f1': 'Komplette 2-Tage-Moderation durch unser Team',
+    'price.p1.f2': 'Design-Thinking-Methodik',
+    'price.p1.f3': 'AI-Prototyping mit Lovable.dev',
+    'price.p1.f4': 'Alle Workshop-Materialien und \u00dcbungen',
+    'price.p1.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
+    'price.p1.f6': 'Live-Deployment der fertigen Anwendung',
+    'price.p1.f7': '2 Wochen Support nach dem Workshop',
+    'price.p1.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p2.name': 'Deep Dive Sprint',
+    'price.p2.desc': '5 Tage umfassende Begleitung mit Research, Testing und Deployment f\u00fcr bis zu 10 Personen.',
+    'price.p2.price': 'ab 18.000\u00a0\u20ac',
+    'price.p2.f1': 'Komplette 5-Tage-Moderation durch unser Team',
+    'price.p2.f2': 'Design-Thinking-Methodik',
+    'price.p2.f3': 'AI-Prototyping mit Lovable.dev',
+    'price.p2.f4': 'Alle Workshop-Materialien und \u00dcbungen',
+    'price.p2.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
+    'price.p2.f6': 'Live-Deployment der fertigen Anwendung',
+    'price.p2.f7': '4 Wochen Support nach dem Workshop',
+    'price.p2.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p3.badge': 'AM FLEXIBELSTEN',
+    'price.p3.name': 'Individueller Workshop',
+    'price.p3.desc': 'Mehr als 10 Personen oder ein anderes Setup? Wir sprechen vorher, um eure Herausforderung zu verstehen \u2014 und gestalten dann einen Workshop, der genau zu eurem Team passt.',
+    'price.p3.price': 'Lass uns sprechen',
+    'price.p3.f1': 'Vorgespr\u00e4ch zur Kl\u00e4rung des Umfangs',
+    'price.p3.f2': 'Flexible Dauer, von 1 bis 5 Tagen',
+    'price.p3.f3': 'Ma\u00dfgeschneiderte \u00dcbungen f\u00fcr eure Branche und euer Team',
+    'price.p3.f4': 'Fokus auf euer konkretes Problem und eure Ziele',
+    'price.p3.f5': 'Individuelles Support-Paket nach dem Workshop',
+    'price.p3.cta': 'Erstgespr\u00e4ch buchen',
+
+    // ── FAQ ──
+    'faq.label': 'FAQ',
+    'faq.title': 'H\u00e4ufig gestellte Fragen',
+    'faq.sub': 'Alles, was ihr \u00fcber den AI Prototyping Workshop wissen m\u00fcsst.',
+    'faq.q1': 'Was genau passiert im 2-Tage-Workshop?',
+    'faq.a1': 'Tag 1 dreht sich um Design Thinking: Euer Team definiert das Problem, erfasst die Bed\u00fcrfnisse der Nutzer und erstellt ein Wireframe der geplanten App. Tag 2 ist Hands-on AI-Prototyping mit Lovable.dev. Euer Team nimmt das Wireframe und baut daraus eine funktionierende Anwendung, testet sie und bringt sie live. Am Ende habt ihr ein fertiges Produkt \u2014 und die Skills, den Prozess zu wiederholen.',
+    'faq.q2': 'Brauchen die Teilnehmenden Programmiererfahrung?',
+    'faq.a2': 'Nein. Euer Team braucht keinerlei technisches Wissen. Ihr baut mit nat\u00fcrlicher Sprache und AI-gest\u00fctzten No-Code-Tools. Marketer, HR-Profis, Operations Manager und Product Owner haben den Workshop bereits erfolgreich absolviert und funktionierende Apps gebaut.',
+    'faq.q3': 'Mit welchem Tool wird der Prototyp gebaut?',
+    'faq.a3': 'Wir nutzen Tools wie Lovable.dev \u2014 einen AI-gest\u00fctzten Application Builder, der nat\u00fcrliche Sprache in voll funktionsf\u00e4hige Web-Apps verwandelt. Daf\u00fcr braucht man kein technisches Wissen. Lovable \u00fcbernimmt alles: Deployment, Authentifizierung, Datenbanken und Hosting. Euer Team konzentriert sich auf die Idee \u2014 Lovable k\u00fcmmert sich um den Rest.',
+    'faq.q4': 'Welche Probleme wurden im Workshop schon gel\u00f6st?',
+    'faq.a4': 'Teams haben interne Tools f\u00fcr HR-Onboarding, Operations-Dashboards, Kundenservice-Workflows, Lagerverwaltung und Projektmanagement gebaut. Ein HR-Team hat die Onboarding-Zeit halbiert. Ein Gr\u00fcnder hat stundenlange w\u00f6chentliche Recherche in ein einziges Tool automatisiert. Der Workshop funktioniert am besten mit einem konkreten, realen Problem aus eurem Arbeitsalltag.',
+    'faq.q5': 'Wie viele Personen k\u00f6nnen teilnehmen?',
+    'faq.a5': 'Das Standardformat unterst\u00fctzt bis zu 10 Teilnehmende. So bleibt der Workshop hands-on und jede Person bekommt individuelles Coaching. F\u00fcr Gruppen \u00fcber 10 Personen bieten wir individuelle Workshops mit angepasster Moderation und zus\u00e4tzlichen Coaches.',
+    'faq.q6': 'Was ist der Unterschied zwischen dem 2-Tage- und dem 5-Tage-Format?',
+    'faq.a6': 'Der 2-Tage Prototype Sprint liefert ein funktionierendes MVP. Der 5-Tage Deep Dive bringt zus\u00e4tzlich mehr Grundlagenwissen, mehr Iterationszyklen, gr\u00fcndliches Testing und ein ausgereifteres Endprodukt. Das 5-Tage-Format ist ideal f\u00fcr komplexe Probleme oder wenn ihr einen tieferen Skill-Transfer im Team wollt.',
+    'faq.q7': 'Kann der Workshop auch remote stattfinden?',
+    'faq.a7': 'Nein. Der Workshop ist f\u00fcr die Durchf\u00fchrung vor Ort konzipiert, um maximale Zusammenarbeit und Wirkung zu erzielen.',
+    'faq.q8': 'Wie schnell sehen Teams Ergebnisse?',
+    'faq.a8': 'Am Ende von Tag 2 hat euer Team einen funktionierenden Prototyp, der deployed und einsatzbereit ist. Viele Teams fangen sofort an, das Tool zu nutzen. Da alles mit nat\u00fcrlicher Sprache gebaut wird, ist der Skill-Transfer unmittelbar. Wir geben au\u00dferdem alle Workshop-Materialien mit, sodass die Teilnehmenden den Prozess selbstst\u00e4ndig wiederholen k\u00f6nnen.',
+    'faq.q9': 'F\u00fcr welche Branchen ist der Workshop geeignet?',
+    'faq.a9': 'Der Workshop funktioniert branchen\u00fcbergreifend. Wir haben Erfahrung mit Automotive (BMW-\u00d6kosystem), Enterprise SaaS, Fintech, HR-lastigen Organisationen, Mittelstand-Fertigung, Logistik, Beratungsfirmen und Innovationsteams.',
+    'faq.q10': 'Wie passt Design Thinking in einen AI-Workshop?',
+    'faq.a10': 'Design Thinking stellt sicher, dass ihr das Richtige baut, bevor ihr es schnell baut. Ohne diesen Schritt springen Teams zu L\u00f6sungen, die am eigentlichen Problem vorbeigehen. Genau diese Kombination macht den Workshop einzigartig: Design Thinking definiert, was gebaut werden soll \u2014 AI-Tools bauen es in Stunden statt Monaten.',
+
+    // ── Footer ──
+    'footer.tagline': 'AI Prototyping Workshops \u00b7 Design Thinking + AI \u00b7 M\u00fcnchen, Deutschland',
+    'footer.copy': '&copy; 2026 Workshoppers. Alle Rechte vorbehalten. \u00b7 <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Erstgespr\u00e4ch buchen</a>'
+  };
+
+  // Cache original English meta values
+  var metaCache = {
+    title: document.title,
+    desc: document.querySelector('meta[name="description"]').content,
+    ogTitle: document.querySelector('meta[property="og:title"]').content,
+    ogDesc: document.querySelector('meta[property="og:description"]').content,
+    twTitle: document.querySelector('meta[name="twitter:title"]').content,
+    twDesc: document.querySelector('meta[name="twitter:description"]').content
+  };
+
+  // Cache original English innerHTML for all i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    el.setAttribute('data-i18n-en', el.innerHTML);
+  });
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+
+    // Update meta tags
+    if (lang === 'de') {
+      document.title = T['_meta_title'];
+      document.querySelector('meta[name="description"]').content = T['_meta_desc'];
+      document.querySelector('meta[property="og:title"]').content = T['_og_title'];
+      document.querySelector('meta[property="og:description"]').content = T['_og_desc'];
+      document.querySelector('meta[property="og:locale"]').content = 'de_DE';
+      document.querySelector('meta[name="twitter:title"]').content = T['_tw_title'];
+      document.querySelector('meta[name="twitter:description"]').content = T['_tw_desc'];
+    } else {
+      document.title = metaCache.title;
+      document.querySelector('meta[name="description"]').content = metaCache.desc;
+      document.querySelector('meta[property="og:title"]').content = metaCache.ogTitle;
+      document.querySelector('meta[property="og:description"]').content = metaCache.ogDesc;
+      document.querySelector('meta[property="og:locale"]').content = 'en_US';
+      document.querySelector('meta[name="twitter:title"]').content = metaCache.twTitle;
+      document.querySelector('meta[name="twitter:description"]').content = metaCache.twDesc;
+    }
+
+    // Translate all data-i18n elements
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (lang === 'de' && T[key]) {
+        el.innerHTML = T[key];
+      } else {
+        var orig = el.getAttribute('data-i18n-en');
+        if (orig !== null) el.innerHTML = orig;
+      }
+    });
+
+    // Update toggle UI
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+
+    // Persist
+    localStorage.setItem('lang', lang);
+
+    // Reveal page
+    document.documentElement.classList.remove('i18n-loading');
+  }
+
+  // Bind toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  // Initial apply
+  setLang(document.documentElement.lang || 'en');
+})();
+</script>
+
 </body>
 </html>
