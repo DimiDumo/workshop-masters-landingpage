@@ -3,13 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Consent Mode + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    if (localStorage.getItem('cookie_consent') === 'granted') {
+      gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDTYC9FC7F"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-NDTYC9FC7F');
+  </script>
   <title>AI Prototyping Workshop | Build a Working App in 2 Days · Workshoppers</title>
   <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Book a discovery call.">
-  <link rel="canonical" href="https://www.yoursite.com/v1/">
+  <link rel="canonical" href="https://workshoppers.ai">
   <meta property="og:type" content="website">
   <meta property="og:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
   <meta property="og:description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop for corporate teams.">
-  <meta property="og:url" content="https://www.yoursite.com/v1/">
+  <meta property="og:url" content="https://workshoppers.ai">
   <meta property="og:site_name" content="Workshoppers">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="de_DE">
@@ -441,6 +455,62 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .lang-btn:hover:not(.active) { color: #0F172A; }
+
+    /* ── COOKIE BANNER ──────────────────────────────── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid #E2E8F0;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+    }
+    .cookie-banner.hidden { display: none; }
+    .cookie-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.5;
+      max-width: 600px;
+    }
+    .cookie-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .cookie-btn-accept {
+      background: #4F46E5;
+      color: #fff;
+    }
+    .cookie-btn-accept:hover { background: #4338CA; }
+    .cookie-btn-decline {
+      background: #F1F5F9;
+      color: #64748B;
+    }
+    .cookie-btn-decline:hover { background: #E2E8F0; color: #334155; }
+    @media (max-width: 640px) {
+      .cookie-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 24px;
+        gap: 16px;
+      }
+    }
   </style>
 
   <script>
@@ -460,7 +530,7 @@
     "@type": "Organization",
     "name": "Workshoppers",
     "description": "AI Prototyping Workshops combining Design Thinking and AI for corporate teams in the DACH region.",
-    "url": "https://www.yoursite.com",
+    "url": "https://workshoppers.ai",
     "sameAs": [
       "https://www.linkedin.com/company/signal-and-spark"
     ],
@@ -1026,6 +1096,15 @@
   </div>
 </footer>
 
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookieBanner" class="cookie-banner hidden">
+  <p class="cookie-text" data-i18n="cookie.text">We use cookies for analytics to understand how visitors use our site. No personal data is sold or shared.</p>
+  <div class="cookie-buttons">
+    <button class="cookie-btn cookie-btn-decline" id="cookieDecline" data-i18n="cookie.decline">Decline</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookieAccept" data-i18n="cookie.accept">Accept</button>
+  </div>
+</div>
+
 <script>
 (function() {
   document.querySelector('.hero-video').playbackRate = 0.5;
@@ -1171,6 +1250,11 @@
     'faq.q10': 'Wie passt Design Thinking in einen AI-Workshop?',
     'faq.a10': 'Design Thinking stellt sicher, dass ihr das Richtige baut, bevor ihr es schnell baut. Ohne diesen Schritt springen Teams zu L\u00f6sungen, die am eigentlichen Problem vorbeigehen. Genau diese Kombination macht den Workshop einzigartig: Design Thinking definiert, was gebaut werden soll \u2014 AI-Tools bauen es in Stunden statt Monaten.',
 
+    // ── Cookie Banner ──
+    'cookie.text': 'Wir verwenden Cookies für Analysen, um zu verstehen, wie Besucher unsere Website nutzen. Es werden keine personenbezogenen Daten verkauft oder weitergegeben.',
+    'cookie.accept': 'Akzeptieren',
+    'cookie.decline': 'Ablehnen',
+
     // ── Footer ──
     'footer.tagline': 'AI Prototyping Workshops \u00b7 Design Thinking + AI \u00b7 M\u00fcnchen, Deutschland',
     'footer.copy': '&copy; 2026 Workshoppers. Alle Rechte vorbehalten. \u00b7 <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Erstgespr\u00e4ch buchen</a>'
@@ -1245,6 +1329,21 @@
 
   // Initial apply
   setLang(document.documentElement.lang || 'en');
+
+  // ── Cookie Consent Banner ──
+  var banner = document.getElementById('cookieBanner');
+  if (!localStorage.getItem('cookie_consent')) {
+    banner.classList.remove('hidden');
+  }
+  document.getElementById('cookieAccept').addEventListener('click', function() {
+    localStorage.setItem('cookie_consent', 'granted');
+    gtag('consent', 'update', { 'analytics_storage': 'granted' });
+    banner.classList.add('hidden');
+  });
+  document.getElementById('cookieDecline').addEventListener('click', function() {
+    localStorage.setItem('cookie_consent', 'denied');
+    banner.classList.add('hidden');
+  });
 })();
 </script>
 
