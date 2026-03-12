@@ -402,10 +402,68 @@
     .footer-text a { color: rgba(255,255,255,0.55); text-decoration: none; }
     .footer-text a:hover { color: #fff; }
 
+    /* ── MOBILE MENU ────────────────────────────────── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #0F172A;
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 80px 24px 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0F172A;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .mobile-menu a:hover { color: #4F46E5; }
+    .mobile-menu .cta-btn {
+      margin-top: 12px;
+      font-size: 16px;
+      padding: 14px 32px;
+    }
+    .mobile-menu .lang-toggle { margin-top: 8px; }
+
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1024px) {
       .header-inner { padding: 16px 24px; }
       nav { display: none; }
+      .header-inner > .lang-toggle,
+      .header-inner > div:last-child { display: none; }
+      .hamburger { display: flex; }
       .hero { padding: 0 24px 60px; }
       .hero-title { font-size: 48px; }
       .hero-title em { font-size: 60px; }
@@ -766,8 +824,25 @@
     <div>
       <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Book a Discovery Call</a>
     </div>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#how-it-works" data-i18n="nav.how">How It Works</a>
+  <a href="#learn" data-i18n="nav.learn">What You Learn</a>
+  <a href="#team" data-i18n="nav.team">Team</a>
+  <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+  <a href="#testimonials" data-i18n="nav.results">Results</a>
+  <a href="#faq" data-i18n="nav.faq">FAQ</a>
+  <div class="lang-toggle" aria-label="Language" role="group">
+    <button data-lang="en" class="lang-btn active">EN</button>
+    <button data-lang="de" class="lang-btn">DE</button>
+  </div>
+  <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Book a Discovery Call</a>
+</div>
 
 <!-- HERO -->
 <section class="hero-section">
@@ -1343,6 +1418,24 @@
   document.getElementById('cookieDecline').addEventListener('click', function() {
     localStorage.setItem('cookie_consent', 'denied');
     banner.classList.add('hidden');
+  });
+
+  // ── Mobile Menu ──
+  var hamburger = document.querySelector('.hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function() {
+    var isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
   });
 })();
 </script>
