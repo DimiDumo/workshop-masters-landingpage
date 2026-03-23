@@ -17,6 +17,21 @@
     gtag('js', new Date());
     gtag('config', 'G-NDTYC9FC7F');
   </script>
+  <!-- Google tag (gtag.js) event - delayed navigation helper -->
+  <script>
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion_event_book_appointment', {
+        'event_callback': callback,
+        'event_timeout': 2000,
+      });
+      return false;
+    }
+  </script>
   <title>AI Prototyping Workshop | Build a Working App in 2 Days · Workshoppers</title>
   <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Book a discovery call.">
   <link rel="canonical" href="https://workshoppers.ai">
