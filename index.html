@@ -33,7 +33,7 @@
     }
   </script>
   <title>AI Prototyping Workshop | Build a Working App in 2 Days · Workshoppers</title>
-  <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Book a discovery call.">
+  <meta name="description" content="Your team solves a real problem using AI + Design Thinking — and walks away with a live product. 2-day or 5-day workshop. DACH region. Free discovery call.">
   <link rel="canonical" href="https://workshoppers.ai">
   <meta property="og:type" content="website">
   <meta property="og:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
@@ -44,18 +44,21 @@
   <meta property="og:locale:alternate" content="de_DE">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Prototyping Workshop | Build a Working App in 2 Days">
-  <meta name="twitter:description" content="AI meets Design Thinking — your team builds a real, functional solution in just a few days. Book a discovery call.">
+  <meta name="twitter:description" content="AI meets Design Thinking — your team builds a real, functional solution in just a few days. Free discovery call.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+    }
     body {
       font-family: 'Inter', sans-serif;
       color: #0F172A;
       background: #FFFFFF;
-      overflow-x: hidden;
     }
 
     /* ── HEADER ──────────────────────────────────────── */
@@ -75,6 +78,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 64px;
+      width: 100%;
     }
     .logo-wrap { display: flex; align-items: center; gap: 10px; }
     .logo-mark {
@@ -96,6 +100,16 @@
       transition: background 0.15s, transform 0.15s;
     }
     .cta-btn:hover { background: #4338CA; transform: translateY(-1px); }
+    .cta-contact {
+      background: #fff; color: #4F46E5;
+      font-size: 14px; font-weight: 600;
+      padding: 10px 24px; border-radius: 8px;
+      text-decoration: none; display: inline-block;
+      border: 2px solid #4F46E5;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .cta-contact:hover { background: #EEF2FF; transform: translateY(-1px); }
+    .cta-wrap { display: flex; gap: 8px; align-items: center; }
 
     /* ── HERO V1 ─────────────────────────────────────── */
     @keyframes v1FadeUp {
@@ -350,6 +364,10 @@
       transition: background 0.15s, transform 0.15s;
     }
     .pricing-cta:hover { background: #4338CA; transform: translateY(-1px); }
+    .pricing-cta-wrap { display: flex; gap: 8px; }
+    .pricing-cta-wrap .pricing-cta { flex: 1; }
+    .pricing-cta-outline { background: #fff !important; color: #4F46E5 !important; border: 2px solid #4F46E5; }
+    .pricing-cta-outline:hover { background: #EEF2FF !important; }
 
     /* ── FAQ ─────────────────────────────────────────── */
     .faq-wrap { background: #fff; }
@@ -433,10 +451,13 @@
 
     /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1200px) {
-      .header-inner { padding: 16px 24px; }
+      .header-inner { padding: 12px 16px; gap: 10px; }
       nav { display: none; }
       .cta-wrap { display: none; }
-      .cta-icon { display: flex; }
+      .logo-wrap { flex: 1; min-width: 0; }
+      .logo-text { font-size: 17px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .cta-icon { display: flex; flex-shrink: 0; width: 36px; height: 36px; }
+      .cta-icon svg { width: 18px; height: 18px; }
       .hero { padding: 0 24px 60px; }
       .hero-title { font-size: 48px; }
       .hero-title em { font-size: 60px; }
@@ -453,6 +474,8 @@
       .hero-sub { font-size: 16px; }
       .trust-row { flex-direction: column; gap: 8px; }
       .section-title { font-size: 26px; }
+      .pricing-cta-wrap { flex-direction: column; }
+      .pricing-cta { font-size: 14px; padding: 12px 20px; }
       .card-main { font-size: 36px; }
       .logos-row { gap: 28px; flex-wrap: wrap; }
       .site-footer { padding: 32px 24px; }
@@ -486,6 +509,11 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .lang-btn:hover:not(.active) { color: #0F172A; }
+    @media (max-width: 1200px) {
+      .lang-toggle { background: transparent; padding: 0; gap: 0; }
+      .lang-btn.active { display: none; }
+      .lang-btn { background: #F1F5F9; color: #0F172A; padding: 6px 10px; border-radius: 8px; }
+    }
 
     /* ── COOKIE BANNER ──────────────────────────────── */
     .cookie-banner {
@@ -795,9 +823,13 @@
       <button data-lang="de" class="lang-btn">DE</button>
     </div>
     <div class="cta-wrap">
-      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Book a Discovery Call</a>
+      <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="cta-contact" data-i18n="cta.contact">Contact</a>
+      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-btn" data-i18n="cta.book">Free Discovery Call</a>
     </div>
-    <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-icon" aria-label="Book a Discovery Call">
+    <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="cta-icon" aria-label="Contact" style="background:#fff;border:2px solid #4F46E5">
+      <svg viewBox="0 0 24 24" style="stroke:#4F46E5"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><polyline points="22,4 12,13 2,4"/></svg>
+    </a>
+    <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="cta-icon" aria-label="Free Discovery Call">
       <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
     </a>
   </div>
@@ -817,7 +849,10 @@
     <h1 class="hero-title" id="v1-title" data-i18n="hero.title">Use AI and<br><em>Design Thinking</em><br>to Build Your Own Solutions</h1>
     <p class="hero-sub" id="v1-desc" data-i18n="hero.sub">AI meets Design Thinking — your team builds a real, functional solution in just a few days. Innovate. Build. Upskill.</p>
     <div class="hero-cta-wrap" id="v1-cta">
-      <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block" data-i18n="hero.cta">Book a Discovery Call</a>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="hero-cta-btn" style="text-decoration:none;color:#fff;display:inline-block" data-i18n="hero.cta">Free Discovery Call</a>
+        <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="hero-cta-btn" style="text-decoration:none;color:#0f172a;display:inline-block;background:#fff;border:2px solid #0f172a;box-shadow:none" data-i18n="cta.contact">Contact</a>
+      </div>
       <div class="trust-row">
         <div class="trust-logos">
           <span>BMW</span>
@@ -1027,7 +1062,10 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f6">Live deployment of working application</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p1.f7">2 weeks post-workshop support</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p1.cta">Book a Discovery Call</a>
+        <div class="pricing-cta-wrap">
+          <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p1.cta">Free Discovery Call</a>
+          <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="pricing-cta pricing-cta-outline" data-i18n="cta.contact">Contact</a>
+        </div>
       </div>
       <div class="pricing-card">
         <div class="pricing-header">
@@ -1045,7 +1083,10 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f6">Live deployment of working application</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p2.f7">4 weeks post-workshop support</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p2.cta">Book a Discovery Call</a>
+        <div class="pricing-cta-wrap">
+          <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p2.cta">Free Discovery Call</a>
+          <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="pricing-cta pricing-cta-outline" data-i18n="cta.contact">Contact</a>
+        </div>
       </div>
       <div class="pricing-card featured">
         <div class="pricing-badge" data-i18n="price.p3.badge">MOST FLEXIBLE</div>
@@ -1062,7 +1103,10 @@
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f4">Focus on your specific problem and goals</span></div>
           <div class="pricing-feature"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="price.p3.f5">Custom post-workshop support package</span></div>
         </div>
-        <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p3.cta">Book a Discovery Call</a>
+        <div class="pricing-cta-wrap">
+          <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank" class="pricing-cta" data-i18n="price.p3.cta">Free Discovery Call</a>
+          <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact" class="pricing-cta pricing-cta-outline" data-i18n="cta.contact">Contact</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1126,7 +1170,7 @@
   <div class="footer-inner">
     <span class="footer-brand">Workshoppers</span>
     <p class="footer-text" data-i18n="footer.tagline">AI Prototyping Workshops · Design Thinking + AI · Munich, Germany</p>
-    <p class="footer-text" data-i18n="footer.copy">&copy; 2026 Workshoppers. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Book a Discovery Call</a> · <a href="impressum.html">Impressum</a></p>
+    <p class="footer-text" data-i18n="footer.copy">&copy; 2026 Workshoppers. All rights reserved. · <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Free Discovery Call</a> · <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact">Contact</a> · <a href="impressum.html">Impressum</a></p>
   </div>
 </footer>
 
@@ -1150,7 +1194,7 @@
     '_og_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
     '_og_desc': 'Euer Team löst ein echtes Problem mit AI + Design Thinking — und geht mit einem fertigen Produkt nach Hause. Workshop für Unternehmensteams.',
     '_tw_title': 'AI Prototyping Workshop | Eine funktionierende App in 2 Tagen',
-    '_tw_desc': 'AI trifft Design Thinking — euer Team baut in wenigen Tagen eine echte, funktionierende Lösung. Erstgespräch buchen.',
+    '_tw_desc': 'AI trifft Design Thinking - euer Team baut in wenigen Tagen eine echte, funktionierende Lösung. Erstgespräch buchen.',
 
     // ── Nav ──
     'nav.how': 'So funktioniert\u2019s',
@@ -1159,25 +1203,26 @@
     'nav.pricing': 'Preise',
     'nav.results': 'Ergebnisse',
     'nav.faq': 'FAQ',
-    'cta.book': 'Erstgespr\u00e4ch buchen',
+    'cta.book': 'Kostenloses Erstgespr\u00e4ch',
+    'cta.contact': 'Kontakt',
 
     // ── Hero ──
     'hero.badge': 'Einzigartiger Workshop',
-    'hero.title': 'Nutzt AI und<br><em>Design Thinking</em><br>um eure eigenen L\u00f6sungen zu bauen',
-    'hero.sub': 'AI trifft Design Thinking \u2014 euer Team baut in wenigen Tagen eine echte, funktionierende L\u00f6sung. Innovieren. Bauen. Dazulernen.',
-    'hero.cta': 'Erstgespr\u00e4ch buchen',
+    'hero.title': 'Nutzt AI und<br><em>Design Thinking</em><br>um selbst L\u00f6sungen zu bauen',
+    'hero.sub': 'AI trifft Design Thinking - euer Team baut in wenigen Tagen eine echte, funktionierende L\u00f6sung. Innovieren. Selber machen. Upskill durch Anwendung.',
+    'hero.cta': 'Kostenloses Erstgespr\u00e4ch',
 
     // ── Problem ──
     'problem.label': 'Das Problem',
-    'problem.title': 'Die meisten Teams wissen genau,<br>was sie ausbremst',
+    'problem.title': 'Die meisten Teams wissen genau,<br>was bremst',
     'problem.sub': 'Das Problem ist nicht, das Problem zu erkennen \u2014 sondern die Zeit, die Tools und die Methode zu finden, um wirklich etwas dagegen zu tun. Und so bleibt es auf der Liste. Quartal f\u00fcr Quartal.',
-    'problem.card.sub': 'Was w\u00e4re, wenn ihr es<br>einfach\u2026 l\u00f6sen k\u00f6nntet?',
+    'problem.card.sub': 'Was w\u00e4re, wenn ihr es<br>einfach l\u00f6sen k\u00f6nntet?',
     'problem.card.main': 'Diese Woche.',
 
     // ── How It Works ──
     'how.label': 'So funktioniert\u2019s',
     'how.title': 'Wir unterrichten AI nicht in der Theorie.<br>Wir geben eurem Team ein Ziel.',
-    'how.sub': 'Weil man neue Skills nicht in Kursen lernt. Sondern mit einem Projekt, einer Deadline und einem Ergebnis, das sich lohnt.',
+    'how.sub': 'Neue Skills und Tools lernt man nicht in Vorträgen. Sondern mit einem Projekt, einer Deadline und einem Ergebnis.',
     'how.s1.title': 'Das Problem verstehen',
     'how.s1.desc': 'Euer Team nutzt Design Thinking, um die Herausforderung wirklich zu verstehen: Wen betrifft sie? Warum ist sie wichtig? Und wie sieht eine echte L\u00f6sung aus?',
     'how.s1.tag': 'Teil 1 \u2014 Design Thinking',
@@ -1190,7 +1235,7 @@
 
     // ── Skills ──
     'learn.label': 'Skills',
-    'learn.title': 'Was euer Team durch Machen lernt',
+    'learn.title': 'Learning by doing',
     'learn.sub': 'Praktische Skills, die euer Team sofort einsetzt \u2014 und auch lange nach dem Workshop noch nutzt.',
     'learn.c1.title': 'AI-Tools souver\u00e4n einsetzen',
     'learn.c1.desc': 'Und ihre Grenzen kennen. Verstehen, was AI kann und was nicht \u2014 und sie gezielt einsetzen.',
@@ -1236,7 +1281,7 @@
     'price.p1.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
     'price.p1.f6': 'Live-Deployment der fertigen Anwendung',
     'price.p1.f7': '2 Wochen Support nach dem Workshop',
-    'price.p1.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p1.cta': 'Kostenloses Erstgespr\u00e4ch',
     'price.p2.name': 'Deep Dive Sprint',
     'price.p2.desc': '5 Tage umfassende Begleitung mit Research, Testing und Deployment f\u00fcr bis zu 10 Personen.',
     'price.p2.price': 'ab 18.000\u00a0\u20ac',
@@ -1247,7 +1292,7 @@
     'price.p2.f5': 'Plattformzugang f\u00fcr alle Teilnehmenden',
     'price.p2.f6': 'Live-Deployment der fertigen Anwendung',
     'price.p2.f7': '4 Wochen Support nach dem Workshop',
-    'price.p2.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p2.cta': 'Kostenloses Erstgespr\u00e4ch',
     'price.p3.badge': 'AM FLEXIBELSTEN',
     'price.p3.name': 'Individueller Workshop',
     'price.p3.desc': 'Mehr als 10 Personen oder ein anderes Setup? Wir sprechen vorher, um eure Herausforderung zu verstehen \u2014 und gestalten dann einen Workshop, der genau zu eurem Team passt.',
@@ -1257,7 +1302,7 @@
     'price.p3.f3': 'Ma\u00dfgeschneiderte \u00dcbungen f\u00fcr eure Branche und euer Team',
     'price.p3.f4': 'Fokus auf euer konkretes Problem und eure Ziele',
     'price.p3.f5': 'Individuelles Support-Paket nach dem Workshop',
-    'price.p3.cta': 'Erstgespr\u00e4ch buchen',
+    'price.p3.cta': 'Kostenloses Erstgespr\u00e4ch',
 
     // ── FAQ ──
     'faq.label': 'FAQ',
@@ -1291,7 +1336,7 @@
 
     // ── Footer ──
     'footer.tagline': 'AI Prototyping Workshops \u00b7 Design Thinking + AI \u00b7 M\u00fcnchen, Deutschland',
-    'footer.copy': '&copy; 2026 Workshoppers. Alle Rechte vorbehalten. \u00b7 <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Erstgespr\u00e4ch buchen</a> \u00b7 <a href="impressum.html">Impressum</a>'
+    'footer.copy': '&copy; 2026 Workshoppers. Alle Rechte vorbehalten. \u00b7 <a href="https://meetings-eu1.hubspot.com/raphael-herkommer/workshoppers-discovery-call" target="_blank">Kostenloses Erstgespr\u00e4ch</a> \u00b7 <a href="mailto:rh@gallerytalk.io?subject=Workshoppers.ai%20contact">Kontakt</a> \u00b7 <a href="impressum.html">Impressum</a>'
   };
 
   // Cache original English meta values
